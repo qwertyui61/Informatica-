@@ -1,0 +1,1 @@
+# Informatica app rules

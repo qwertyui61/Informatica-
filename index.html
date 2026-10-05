@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="informatica">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informatica v2.0.0 — INFORMATICA — A Student's Heaven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============ THEME ENGINE ============ */
+:root{
+  --accent:#38e8ff; --accent2:#a855f7; --accent3:#22d3ee;
+  --bg0:#03040c; --bg1:#080b1c; --bg2:#0d1230;
+  --text:#eaf2ff; --muted:#8ea0c8; --glass:rgba(16,22,48,.55);
+  --line:rgba(120,160,255,.18); --glow:0 0 40px rgba(56,232,255,.35);
+}
+[data-theme="maths"]{--accent:#5b8cff;--accent2:#8b5cf6;--accent3:#22d3ee;--bg0:#050716;--bg1:#0a1030;--bg2:#141c4a;--glow:0 0 40px rgba(91,140,255,.4)}
+[data-theme="physics"]{--accent:#ff9f1c;--accent2:#ff5e5b;--accent3:#ffd166;--bg0:#0d0700;--bg1:#1a0f04;--bg2:#331b06;--glow:0 0 40px rgba(255,159,28,.4)}
+[data-theme="chemistry"]{--accent:#2ee6a8;--accent2:#12b886;--accent3:#a3ffd6;--bg0:#020d0a;--bg1:#041a14;--bg2:#073024;--glow:0 0 40px rgba(46,230,168,.4)}
+[data-theme="biology"]{--accent:#7dff9b;--accent2:#39d98a;--accent3:#c6ff7a;--bg0:#030d05;--bg1:#06180c;--bg2:#0a2b16;--glow:0 0 40px rgba(125,255,155,.35)}
+[data-theme="history"]{--accent:#ffb26b;--accent2:#c77b3a;--accent3:#ffd9a0;--bg0:#0c0703;--bg1:#1a1008;--bg2:#2e1c0d;--glow:0 0 40px rgba(255,178,107,.38)}
+[data-theme="geography"]{--accent:#3ec9ff;--accent2:#1f8fd6;--accent3:#7ff0ff;--bg0:#020b14;--bg1:#04182b;--bg2:#062a45;--glow:0 0 40px rgba(62,201,255,.4)}
+[data-theme="english"]{--accent:#ff6fb5;--accent2:#c94f9b;--accent3:#ffc2e2;--bg0:#0d040a;--bg1:#1c0816;--bg2:#330f28;--glow:0 0 40px rgba(255,111,181,.4)}
+[data-theme="languages"]{--accent:#b07cff;--accent2:#7c4dff;--accent3:#e0c2ff;--bg0:#08040f;--bg1:#120a24;--bg2:#1f1240;--glow:0 0 40px rgba(176,124,255,.4)}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;background:var(--bg0);color:var(--text);
+  overflow-x:hidden;transition:background .8s ease,color .5s ease;
+}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;transition:opacity .8s;
+  background:
+    radial-gradient(60% 50% at 15% 10%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%),
+    radial-gradient(50% 50% at 85% 30%, color-mix(in srgb, var(--accent2) 28%, transparent), transparent 70%),
+    radial-gradient(70% 60% at 50% 100%, color-mix(in srgb, var(--accent3) 22%, transparent), transparent 70%);
+  filter:blur(30px);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1.05)}to{transform:translate3d(2%,2%,0) scale(1.12)}}
+main,header,footer{position:relative;z-index:2}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 26px;backdrop-filter:blur(18px);background:linear-gradient(180deg,rgba(3,4,12,.82),rgba(3,4,12,0));
+  border-bottom:1px solid var(--line);transition:background .6s,border-color .6s}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Orbitron';font-weight:900;letter-spacing:3px;font-size:1.05rem}
+.brand .orb{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+  box-shadow:var(--glow);animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.navlinks{display:flex;gap:22px;font-size:.82rem;letter-spacing:.6px}
+.navlinks a{color:var(--muted);text-decoration:none;transition:color .3s;position:relative}
+.navlinks a:hover{color:var(--accent)}
+@media(max-width:820px){.navlinks{display:none}}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 20px 60px}
+.hero .kicker{font-family:'Space Mono';color:var(--accent);letter-spacing:6px;font-size:.78rem;margin-bottom:18px;opacity:.9}
+.hero h1{font-family:'Cinzel Decorative','Trajan Pro','Times New Roman',serif;font-weight:900;font-size:clamp(2.5rem,9vw,7.2rem);line-height:1;letter-spacing:6px;
+  background:linear-gradient(120deg,var(--accent),var(--accent3) 40%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px color-mix(in srgb,var(--accent) 45%,transparent))}
+.hero h1{font-variant:small-caps;text-shadow:0 0 28px color-mix(in srgb,var(--accent) 18%,transparent);}
+.hero p.sub{margin-top:22px;max-width:720px;color:var(--muted);font-size:clamp(.95rem,2.4vw,1.2rem);font-weight:300;line-height:1.7}
+.hero .chips{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chip{padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font-size:.76rem;color:var(--muted);backdrop-filter:blur(8px)}
+.chip b{color:var(--accent)}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.7rem;letter-spacing:3px;
+  font-family:'Space Mono';animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(-50%,10px)}}
+
+/* ============ SECTION SHELL ============ */
+section{padding:110px 24px;max-width:1240px;margin:0 auto}
+.sect-head{margin-bottom:44px}
+.sect-head .tag{font-family:'Space Mono';color:var(--accent);letter-spacing:5px;font-size:.72rem}
+.sect-head h2{font-family:'Orbitron';font-weight:700;font-size:clamp(1.6rem,4.4vw,2.8rem);margin-top:10px;letter-spacing:1px}
+.sect-head p{color:var(--muted);margin-top:12px;max-width:720px;line-height:1.7;font-weight:300}
+.reveal{opacity:0;transform:translateY(46px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ MODES ============ */
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.mode{cursor:pointer;padding:20px;border-radius:18px;border:1px solid var(--line);background:var(--glass);
+  backdrop-filter:blur(14px);transition:transform .35s,box-shadow .35s,border-color .35s;position:relative;overflow:hidden}
+.mode::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--m) 30%,transparent),transparent 70%);opacity:.35}
+.mode:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 50px rgba(0,0,0,.5);border-color:color-mix(in srgb,var(--m) 60%,transparent)}
+.mode.active{border-color:var(--m);box-shadow:0 0 0 1px var(--m),0 18px 50px color-mix(in srgb,var(--m) 30%,transparent)}
+.mode .ico{font-size:1.7rem;position:relative;z-index:1}
+.mode h3{font-family:'Orbitron';font-size:.95rem;margin:12px 0 6px;position:relative;z-index:1}
+.mode p{font-size:.76rem;color:var(--muted);line-height:1.5;position:relative;z-index:1}
+
+/* ============ 3D EXPLORER ============ */
+.explorer{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(160deg,var(--bg1),var(--bg0));
+  box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.ex-tabs{display:flex;gap:8px;padding:16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.ex-tab{cursor:pointer;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);
+  font-family:'Space Mono';font-size:.78rem;letter-spacing:1px;transition:.3s}
+.ex-tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#03040c;font-weight:700;border-color:transparent}
+#gl{width:100%;height:520px;display:block;cursor:grab;touch-action:none}
+#gl:active{cursor:grabbing}
+.ex-hud{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.ex-hud .info{font-size:.82rem;color:var(--muted);max-width:640px;line-height:1.6}
+.ex-hud .info b{color:var(--accent);font-family:'Space Mono'}
+.hint{font-family:'Space Mono';font-size:.68rem;color:var(--muted);letter-spacing:1px;border:1px dashed var(--line);padding:7px 12px;border-radius:10px}
+
+/* ============ TIMELINE ============ */
+.tl-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tl-tools input,.tl-tools select{background:var(--glass);border:1px solid var(--line);color:var(--text);padding:11px 14px;border-radius:12px;
+  font-family:'Inter';font-size:.85rem;outline:none;backdrop-filter:blur(10px)}
+.tl-tools input{flex:1;min-width:200px}
+.tl-tools input:focus{border-color:var(--accent)}
+.era-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.era{cursor:pointer;font-size:.72rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:transparent;transition:.3s;font-family:'Space Mono'}
+.era.active{background:var(--accent);color:#03040c;border-color:transparent;font-weight:700}
+.timeline{position:relative;padding-left:34px;max-height:640px;overflow-y:auto;padding-right:12px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2),transparent)}
+.tl-item{position:relative;margin-bottom:14px;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:var(--glass);
+  backdrop-filter:blur(10px);cursor:pointer;transition:.35s}
+.tl-item:hover{border-color:var(--accent);transform:translateX(6px)}
+.tl-item::before{content:'';position:absolute;left:-31px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+.tl-item .yr{font-family:'Orbitron';color:var(--accent);font-size:1rem;font-weight:700}
+.tl-item .tt{font-weight:600;margin:4px 0 5px;font-size:.95rem}
+.tl-item .rg{font-family:'Space Mono';font-size:.68rem;color:var(--accent2);letter-spacing:1px}
+.tl-item .ds{color:var(--muted);font-size:.82rem;line-height:1.6;max-height:0;overflow:hidden;transition:max-height .5s ease,margin .4s;margin-top:0}
+.tl-item.open .ds{max-height:320px;margin-top:10px}
+.tl-count{font-family:'Space Mono';font-size:.74rem;color:var(--muted);margin-bottom:12px}
+
+/* ============ LAB ============ */
+.lab{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(160deg,var(--bg1),var(--bg0))}
+.lab-tabs{display:flex;gap:8px;padding:14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.lab-tab{cursor:pointer;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:.78rem;font-family:'Space Mono';transition:.3s}
+.lab-tab.active{background:var(--accent);color:#03040c;font-weight:700;border-color:transparent}
+.lab-body{padding:24px;display:grid;grid-template-columns:1.3fr .9fr;gap:26px;align-items:start}
+@media(max-width:860px){.lab-body{grid-template-columns:1fr}}
+.lab-canvas{width:100%;border-radius:16px;background:#02030a;border:1px solid var(--line)}
+.ctrls label{display:block;font-size:.76rem;color:var(--muted);margin:14px 0 6px;font-family:'Space Mono'}
+.ctrls input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrls .val{color:var(--accent);font-family:'Space Mono'}
+.readout{margin-top:16px;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--glass);font-size:.82rem;line-height:1.8}
+.readout b{color:var(--accent);font-family:'Space Mono'}
+
+/* ============ LANGUAGES ============ */
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.lang{cursor:pointer;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--glass);text-align:center;transition:.3s;backdrop-filter:blur(10px)}
+.lang:hover{transform:translateY(-4px);border-color:var(--accent)}
+.lang.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.lang .n{font-weight:600;font-size:.88rem}
+.lang .s{font-size:.68rem;color:var(--muted);font-family:'Space Mono';margin-top:4px}
+.sample{padding:22px;border-radius:16px;border:1px solid var(--line);background:var(--glass);min-height:110px}
+.sample .txt{font-size:1.25rem;line-height:2;color:var(--text)}
+.sample .meta{margin-top:12px;font-size:.74rem;color:var(--muted);font-family:'Space Mono'}
+
+/* ============ LITERATURE ============ */
+.lit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.lit{padding:20px;border-radius:18px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);transition:.35s;cursor:pointer}
+.lit:hover{transform:translateY(-6px);border-color:var(--accent2);box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.lit .reg{font-family:'Space Mono';font-size:.66rem;color:var(--accent2);letter-spacing:1px}
+.lit h3{font-family:'Orbitron';font-size:.9rem;margin:9px 0 4px}
+.lit .au{font-size:.76rem;color:var(--accent)}
+.lit p{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:9px}
+
+/* ============ ABOUT ============ */
+.about{border:1px solid var(--line);border-radius:26px;padding:46px;background:linear-gradient(150deg,var(--bg1),var(--bg0));position:relative;overflow:hidden;text-align:center}
+.about::before{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,color-mix(in srgb,var(--accent) 20%,transparent),transparent 40%);animation:spin 14s linear infinite}
+.about>*{position:relative;z-index:1}
+.about .sig{font-family:'Orbitron';font-size:clamp(1.5rem,4.4vw,2.6rem);font-weight:900;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.about p{color:var(--muted);max-width:620px;margin:16px auto;line-height:1.8;font-weight:300}
+
+footer{text-align:center;padding:50px 20px 130px;color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);font-family:'Space Mono'}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 45%,transparent);border-radius:8px}
+
+/* ============ POLISH LAYER ============ */
+main{padding-bottom:40px}
+.sect-head h2{background:linear-gradient(100deg,var(--text) 30%,color-mix(in srgb,var(--accent) 85%,#fff));-webkit-background-clip:text;background-clip:text;color:transparent}
+.modes{gap:18px}
+.mode{padding:22px 20px;border-radius:20px;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.mode::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1.5px;background:linear-gradient(140deg,color-mix(in srgb,var(--m) 85%,transparent),transparent 55%,color-mix(in srgb,var(--m) 45%,transparent));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;pointer-events:none;z-index:2}
+.mode:hover::before,.mode.active::before{opacity:1}
+.mode .ico{display:inline-flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:14px;background:color-mix(in srgb,var(--m) 16%,transparent);border:1px solid color-mix(in srgb,var(--m) 38%,transparent);font-size:1.35rem;box-shadow:inset 0 0 18px color-mix(in srgb,var(--m) 20%,transparent)}
+.mode.active{transform:translateY(-5px);box-shadow:0 22px 60px color-mix(in srgb,var(--m) 28%,transparent)}
+.mode h3{font-size:1rem}
+.prompts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:26px;max-width:820px}
+.prompt{cursor:pointer;padding:10px 18px;border-radius:999px;border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--text);font-size:.79rem;font-family:'Inter';transition:.3s}
+.prompt:hover{background:color-mix(in srgb,var(--accent) 20%,transparent);transform:translateY(-2px);box-shadow:0 10px 26px color-mix(in srgb,var(--accent) 22%,transparent)}
+.modedock{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:5px;padding:8px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg1) 80%,transparent);backdrop-filter:blur(20px);box-shadow:0 20px 55px rgba(0,0,0,.6);max-width:94vw;overflow-x:auto;scrollbar-width:none}
+.modedock::-webkit-scrollbar{display:none}
+.dockbtn{cursor:pointer;white-space:nowrap;padding:9px 14px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:.73rem;font-family:'Space Mono';letter-spacing:.5px;transition:.28s}
+.dockbtn:hover{color:var(--text);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.dockbtn.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#03040c;font-weight:700;box-shadow:0 6px 20px color-mix(in srgb,var(--accent) 40%,transparent)}
+.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(18px);opacity:0;z-index:80;padding:12px 20px;border-radius:14px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg1) 92%,transparent);backdrop-filter:blur(14px);color:var(--text);font-size:.8rem;transition:.35s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hero p.sub b{font-weight:600}
+
+/* ============ HOMEPAGE AI WORKSPACE ============ */
+.hero{padding-bottom:34px}
+.hero .prompts{margin-bottom:4px}
+.hero .chatpanel{order:10}
+.home-chat-label{margin-top:30px;font-family:'Space Mono';font-size:.65rem;letter-spacing:3px;color:var(--accent);opacity:.9}
+.home-chat-label span{color:var(--muted);letter-spacing:1px}
+
+/* ============ AI CHAT ============ */
+.chatfab{position:fixed;right:20px;bottom:20px;z-index:70;width:60px;height:60px;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#03040c;font-size:1.5rem;cursor:pointer;box-shadow:0 14px 40px color-mix(in srgb,var(--accent) 45%,transparent);display:flex;align-items:center;justify-content:center;transition:.3s}
+.chatfab:hover{transform:scale(1.08) rotate(6deg)}
+.chatfab .badge{position:absolute;top:-3px;right:-3px;width:15px;height:15px;border-radius:50%;background:#ff3b6b;border:2px solid var(--bg0)}
+.chatpanel{position:relative;z-index:5;width:min(980px,100%);height:min(590px,64vh);margin:30px auto 0;border-radius:28px;border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line));background:linear-gradient(170deg,color-mix(in srgb,var(--bg1) 91%,transparent),color-mix(in srgb,var(--bg0) 94%,transparent));backdrop-filter:blur(22px);box-shadow:0 28px 90px rgba(0,0,0,.48),0 0 80px color-mix(in srgb,var(--accent) 8%,transparent);display:flex;flex-direction:column;overflow:hidden;opacity:1;transform:none;pointer-events:auto;transition:.32s cubic-bezier(.2,.8,.2,1)}
+.chatpanel::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 40% at 50% 0%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%)}
+.chatpanel:not(.open){display:none}
+.chatpanel.open{opacity:1;transform:none;pointer-events:auto}
+.home-chat-label{display:block}
+.chat-head{display:flex;align-items:center;gap:12px;padding:16px max(18px,calc((100vw - 940px)/2));border-bottom:1px solid var(--line);position:relative;z-index:1}
+.chat-head .av{width:38px;height:38px;flex:none;border-radius:12px;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent));box-shadow:0 0 22px color-mix(in srgb,var(--accent) 50%,transparent);animation:spin 9s linear infinite}
+.chat-head .ttl{font-family:'Orbitron';font-size:.9rem;letter-spacing:1px}
+.chat-head .st{font-size:.67rem;color:var(--muted);font-family:'Space Mono';margin-top:2px}
+.chat-head .st b{color:var(--accent)}
+.chat-close{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--muted);width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:.9rem;line-height:1}
+.chat-close:hover{color:var(--text);border-color:var(--accent)}
+.chat-msgs{flex:1;overflow-y:auto;padding:26px max(18px,calc((100vw - 940px)/2));display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+.msg{max-width:min(80%,780px);padding:14px 18px;border-radius:16px;font-size:.93rem;line-height:1.75;word-wrap:break-word;animation:msgin .3s ease}
+@keyframes msgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#03040c;border-bottom-right-radius:5px;font-weight:500}
+.msg.bot{align-self:flex-start;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid var(--line);border-bottom-left-radius:5px}
+.msg.bot b{color:var(--accent)}
+.msg.bot code{font-family:'Space Mono';font-size:.8em;background:rgba(255,255,255,.09);padding:1px 5px;border-radius:5px}
+.typing{align-self:flex-start;display:flex;gap:5px;padding:14px 16px;border-radius:16px;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid var(--line)}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:tp 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.chat-chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 max(18px,calc((100vw - 940px)/2)) 10px;max-height:84px;overflow-y:auto;position:relative;z-index:1}
+.cchip{cursor:pointer;font-size:.69rem;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);transition:.25s;font-family:'Inter'}
+.cchip:hover{color:var(--accent);border-color:var(--accent)}
+.chat-input{display:flex;gap:9px;padding:14px max(18px,calc((100vw - 940px)/2));border-top:1px solid var(--line);position:relative;z-index:1}
+.chat-input textarea{flex:1;resize:none;height:46px;max-height:120px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 55%,transparent);color:var(--text);font-family:'Inter';font-size:.85rem;outline:none}
+.chat-input textarea:focus{border-color:var(--accent)}
+.chat-send{width:46px;height:46px;flex:none;border-radius:14px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#03040c;font-size:1.05rem;cursor:pointer;transition:.25s}
+.chat-send:hover{transform:scale(1.06)}
+.chat-send:disabled{opacity:.5;cursor:default}
+@media(max-width:640px){.chatfab{right:12px;bottom:74px;width:52px;height:52px;font-size:1.25rem}.chatpanel{width:calc(100% + 8px);height:68vh;margin:24px -4px 0;border-radius:22px}.chat-head{padding:13px 14px}.chat-msgs{padding:18px 16px}.msg{font-size:.9rem;max-width:88%}.home-chat-label{margin-top:24px;font-size:.58rem;letter-spacing:2px}}
+
+/* ============ AI SETTINGS (bring your own key) ============ */
+.chat-hbtns{margin-left:auto;display:flex;gap:6px}
+.chat-hbtns .chat-close{margin-left:0}
+.chat-set{position:absolute;inset:0;z-index:6;background:linear-gradient(170deg,color-mix(in srgb,var(--bg1) 98%,transparent),color-mix(in srgb,var(--bg0) 98%,transparent));display:flex;flex-direction:column;gap:11px;padding:22px max(18px,calc((100vw - 720px)/2));transform:translateY(101%);transition:.35s cubic-bezier(.2,.8,.2,1);overflow-y:auto}
+.chat-set.open{transform:none}
+.cs-head{display:flex;align-items:center;gap:10px}
+.cs-title{font-family:'Orbitron';font-size:.82rem;letter-spacing:2px}
+.cs-lead{font-size:.73rem;color:var(--muted);line-height:1.6}
+.cs-row{display:flex;flex-direction:column;gap:5px}
+.cs-row label{font-size:.67rem;color:var(--muted);font-family:'Space Mono';letter-spacing:.5px}
+.cs-row input,.cs-row select{padding:11px 13px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg2) 55%,transparent);color:var(--text);font-family:'Inter';font-size:.83rem;outline:none}
+.cs-row input:focus,.cs-row select:focus{border-color:var(--accent)}
+.cs-note{font-size:.7rem;color:var(--muted);line-height:1.6;border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
+.cs-note b{color:var(--accent)}
+.cs-btns{display:flex;gap:9px;margin-top:auto;padding-top:8px}
+.cs-btn{flex:1;padding:11px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--text);font-family:'Inter';font-size:.8rem;cursor:pointer;transition:.25s}
+.cs-btn:hover{border-color:var(--accent);color:var(--accent)}
+.cs-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#03040c;border:none;font-weight:600}
+
+/* ============ VOICE (optional, off by default) ============ */
+.chat-input .mic{width:46px;height:46px;flex:none;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:1.05rem;cursor:pointer;transition:.25s}
+.chat-input .mic:hover{color:var(--accent);border-color:var(--accent)}
+.chat-input .mic.listening{background:#ff3b6b;color:#fff;border-color:transparent;animation:micpulse 1.3s infinite}
+@keyframes micpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,107,.55)}50%{box-shadow:0 0 0 11px rgba(255,59,107,0)}}
+.chat-hbtns #chatVoice.speaking{color:var(--accent);border-color:var(--accent);animation:micpulse 1.3s infinite}
+.msg .spk{display:inline-block;margin-top:9px;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:4px 10px;font-size:.72rem;cursor:pointer;transition:.25s}
+.msg .spk:hover{color:var(--accent);border-color:var(--accent)}
+@media(max-width:640px){.modedock{bottom:10px;padding:6px;gap:3px}.dockbtn{padding:8px 10px;font-size:.67rem}.toast{bottom:70px}}
+/* ===== v1.6 interface-control chrome ===== */
+.act{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;max-width:86%;font-family:'Space Mono';font-size:.68rem;letter-spacing:.3px;padding:7px 13px;border-radius:999px;border:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent);animation:actin .35s ease}
+@keyframes actin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+input[type=range].pulse{animation:pls 1s ease 2}
+@keyframes pls{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--accent) 32%,transparent)}}
+.modal{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(2,3,10,.74);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:.3s}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-card{width:min(720px,96vw);max-height:86vh;overflow-y:auto;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,var(--bg1),var(--bg0));padding:28px;position:relative}
+.modal-card h3{font-family:'Orbitron';font-size:1.15rem;margin-bottom:6px}
+.modal-card .mreg{font-family:'Space Mono';font-size:.68rem;color:var(--accent2);letter-spacing:1px}
+.modal-card .mau{color:var(--accent);font-size:.85rem;margin:4px 0 14px}
+.modal-card p{color:var(--muted);line-height:1.75;font-size:.9rem;margin-bottom:12px}
+.modal-card .mq{border-left:3px solid var(--accent);padding:10px 16px;margin:14px 0;font-style:italic;color:var(--text)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.modal-close:hover{color:var(--text);border-color:var(--accent)}
+@media (prefers-reduced-motion: reduce){.act,input[type=range].pulse{animation:none}}
+/* ===== live internet chrome ===== */
+#chatWeb.on{color:var(--accent);border-color:var(--accent);box-shadow:0 0 12px color-mix(in srgb,var(--accent) 35%,transparent)}
+.sysline{align-self:center;font-family:'Space Mono';font-size:.66rem;color:var(--muted);padding:5px 13px;border-radius:999px;border:1px dashed var(--line);background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.wsrc{display:flex;flex-wrap:wrap;gap:6px;align-items:center;align-self:flex-start;max-width:94%;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--accent) 5%,transparent)}
+.wsrc .wlab{font-family:'Space Mono';font-size:.62rem;color:var(--accent);letter-spacing:.5px}
+.wsrc a{font-size:.64rem;font-family:'Space Mono';color:var(--muted);text-decoration:none;padding:3px 9px;border-radius:999px;border:1px solid var(--line);max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wsrc a:hover{color:var(--text);border-color:var(--accent)}
+/* ===== wikipedia explore ===== */
+.wikiwrap{max-width:960px;margin:0 auto}
+.wikibar{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 18px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 8%,transparent),transparent)}
+.wikibar:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.wikiico{font-size:1rem;opacity:.85}
+.wikibar input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);font-family:inherit;font-size:.95rem;padding:9px 0}
+.wikibar input::placeholder{color:var(--muted)}
+.wikibar button{font-family:'Space Mono';font-size:.7rem;letter-spacing:1px;padding:11px 18px;border-radius:11px;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);cursor:pointer;transition:.25s;white-space:nowrap}
+.wikibar button:hover{background:var(--accent);color:var(--bg0)}
+.wikihint{margin-top:13px;font-family:'Space Mono';font-size:.68rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.wchip{font-family:inherit;font-size:.68rem;padding:4px 11px 4px 5px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--accent) 3%,transparent);color:var(--muted);cursor:pointer;transition:.22s;display:inline-flex;align-items:center;gap:7px;line-height:1;white-space:nowrap}
+.wchip:hover{color:var(--accent);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent);transform:translateY(-1px)}
+.wchip .wthumb{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block;background:#0a0e1e;border:1px solid var(--line);flex:none}
+.wchip .wthumb-fallback{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,transparent);font-size:.72rem;flex:none}
+@media(max-width:600px){.wchip{padding-right:9px}.wchip .wthumb,.wchip .wthumb-fallback{width:22px;height:22px}}
+.wikigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px;margin-top:20px}
+.wcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--accent) 4%,transparent);cursor:pointer;transition:.28s;text-align:left;padding:0;display:block;width:100%}
+.wcard:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.wcard img{width:100%;height:120px;object-fit:cover;display:block;background:#0a0e1e}
+.wcard .wb{padding:11px 13px}.wsuggest{min-height:190px}.wsuggest img{height:118px}.wsuggest p{font-size:.68rem}
+.wcard h4{font-family:'Orbitron';font-size:.76rem;margin-bottom:5px;color:var(--text);line-height:1.3}
+.wcard p{font-size:.72rem;color:var(--muted);line-height:1.5}
+.wpanel{position:fixed;inset:0;z-index:95;display:flex;justify-content:center;align-items:flex-start;padding:26px 18px;background:rgba(2,3,10,.8);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:.3s;overflow-y:auto}
+.wpanel.open{opacity:1;pointer-events:auto}
+.wpanel-card{width:min(880px,96vw);border-radius:22px;border:1px solid var(--line);background:linear-gradient(165deg,var(--bg1),var(--bg0));overflow:hidden;position:relative;margin:auto}
+.whero{position:relative;height:252px;background:#0a0e1e;overflow:hidden}
+.whero img{width:100%;height:100%;object-fit:cover;display:block}
+.whero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 28%,rgba(3,4,12,.94))}
+.whero .wt{position:absolute;left:26px;right:26px;bottom:18px;z-index:2}
+.whero .wt h3{font-family:'Orbitron';font-size:1.5rem;line-height:1.15}
+.whero .wt .wd{font-family:'Space Mono';font-size:.7rem;color:var(--accent);letter-spacing:.6px;margin-top:6px}
+.wbody{padding:24px 26px 28px}
+.wbody p.wex{color:var(--muted);line-height:1.85;font-size:.92rem}
+.wsub{font-family:'Orbitron';font-size:.72rem;letter-spacing:1.4px;color:var(--accent);margin:24px 0 11px}
+.wfacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.wfact{border:1px solid var(--line);border-radius:11px;padding:10px 13px;background:color-mix(in srgb,var(--accent) 5%,transparent)}
+.wfact .fl{font-family:'Space Mono';font-size:.58rem;color:var(--muted);letter-spacing:.6px;text-transform:uppercase}
+.wfact .fv{font-size:.86rem;color:var(--text);margin-top:4px;font-weight:600;line-height:1.4}
+.wgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:9px}
+.wgal img{width:100%;height:92px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer;transition:.25s;background:#0a0e1e}
+.wgal img:hover{border-color:var(--accent);transform:scale(1.03)}
+.wrel{display:flex;flex-wrap:wrap;gap:8px}
+.wrel button{font-size:.72rem;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:.22s}
+.wrel button:hover{color:var(--accent);border-color:var(--accent)}
+.wacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.wacts a,.wacts button{font-family:'Space Mono';font-size:.68rem;letter-spacing:.6px;padding:11px 18px;border-radius:11px;border:1px solid var(--line);background:transparent;color:var(--text);text-decoration:none;cursor:pointer;transition:.25s}
+.wacts a:hover,.wacts button:hover{border-color:var(--accent);color:var(--accent)}
+.wacts .prim{background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
+.wacts .prim:hover{background:var(--accent);color:var(--bg0)}
+.wloading{display:flex;align-items:center;gap:10px;justify-content:center;padding:30px;font-family:'Space Mono';font-size:.72rem;color:var(--muted);grid-column:1/-1;text-align:center}
+@media(max-width:600px){.whero{height:180px}.whero .wt h3{font-size:1.1rem}.wbody{padding:18px}.wikibar{padding:8px 10px 8px 14px}.wikibar button{padding:10px 13px}}
+
+
+/* ===== CINEMATIC GALAXY BACKGROUND ===== */
+#galaxyCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9;mix-blend-mode:screen}
+@media(max-width:700px){#galaxyCanvas{opacity:.72}}
+@media(prefers-reduced-motion:reduce){#galaxyCanvas{opacity:.68}}
+</style>
+
+<meta name="theme-color" content="#03040c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Informatica">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<canvas id="galaxyCanvas" aria-hidden="true"></canvas>
+<div class="aurora"></div>
+
+<nav>
+  <div class="brand"><div class="orb"></div><span>INFORMATICA</span></div>
+  <div class="navlinks">
+    <a href="#explore">Explore</a><a href="#modes">Modes</a><a href="#explorer">3D Explorer</a><a href="#timeline">History</a>
+    <a href="#lab">Lab</a><a href="#languages">Languages</a><a href="#literature">Literature</a><a href="#about">Creator</a>
+  </div>
+</nav>
+<div class="modedock" id="modeDock"></div>
+
+<header class="hero">
+  <div class="kicker">A STUDENT'S HEAVEN · EST. 2026</div>
+  <h1>INFORMATICA</h1>
+  <p class="sub" id="heroSub">Ask anything. Understand everything. An immersive AI tutor that answers in text, then shows you the idea in three dimensions — the human body, the Earth, the Solar System, and the turning points of history from 1600 to today.</p>
+  <div class="chips">
+    <div class="chip"><b>3D</b> models you can move</div>
+    <div class="chip"><b>85</b> historical events</div>
+    <div class="chip"><b>12</b> essay languages</div>
+    <div class="chip"><b>9</b> subject modes</div>
+    <div class="chip"><b>Diagrams</b> &amp; experiments</div>
+  </div>
+  <div class="prompts" id="heroPrompts"></div>
+  <div class="home-chat-label">INFORMATICA AI <span>· ask anything, right here</span></div>
+  <button class="chatfab" id="chatFab" aria-label="Open Informatica AI chat">✦<span class="badge" id="chatBadge"></span></button>
+<div class="chatpanel" id="chatPanel" role="dialog" aria-label="Informatica AI chat">
+  <div class="chat-head">
+    <div class="av"></div>
+    <div><div class="ttl">INFORMATICA AI</div><div class="st" id="chatStatus">online · <b id="chatModeName">General</b> mode</div></div>
+    <div class="chat-hbtns">
+      <button class="chat-close" id="chatWeb" aria-label="Internet access" title="Internet access">🌐</button>
+      <button class="chat-close" id="chatVoice" aria-label="Read answers aloud" title="Read answers aloud">🔇</button>
+      <button class="chat-close" id="chatGear" aria-label="AI settings" title="Connect your own fast API key">⚙</button>
+      <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+  </div>
+  <div class="chat-set" id="chatSet">
+    <div class="cs-head"><button class="chat-close" id="csBack" aria-label="Back">←</button><div class="cs-title">AI SETTINGS</div></div>
+    <p class="cs-lead">Connect your own API key for much faster replies. The key is saved only in this browser's local storage — it is never written into this page and never leaves your device except to call the provider you choose.</p>
+    <div class="cs-row"><label>PROVIDER</label><select id="csProvider"><option value="groq">Groq — fastest</option><option value="openai">OpenAI</option><option value="gemini">Google Gemini</option><option value="custom">Custom (OpenAI-compatible)</option></select></div>
+    <div class="cs-row"><label>API KEY</label><input id="csKey" type="password" placeholder="paste your key here" autocomplete="off"></div>
+    <div class="cs-row" id="csBaseRow"><label>BASE URL</label><input id="csBase" placeholder="https://api.example.com/v1" autocomplete="off"></div>
+    <div class="cs-row"><label>MODEL (OPTIONAL)</label><input id="csModel" placeholder="auto" autocomplete="off"></div>
+    <div class="cs-note" id="csNote"></div>
+    <div class="cs-btns"><button class="cs-btn primary" id="csSave">Save key</button><button class="cs-btn" id="csClear">Clear</button></div>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <div class="chat-input">
+    <textarea id="chatText" placeholder="Ask anything — maths, science, history, an essay…" rows="1"></textarea>
+    <button class="mic" id="chatMic" aria-label="Voice input" title="Ask by voice">🎤</button>
+    <button class="chat-send" id="chatSend" aria-label="Send">➤</button>
+  </div>
+</div>
+  <div class="scrollcue">SCROLL TO EXPLORE ▾</div>
+</header>
+
+<main>
+<section id="explore">
+  <div class="sect-head reveal"><div class="tag">SEARCH · WIKIPEDIA</div>
+    <h2>Look it up</h2>
+    <p>Search the world's largest encyclopaedia. Every result opens a topic panel with pictures, key facts and related reading — straight from the live source.</p></div>
+  <div class="wikiwrap reveal">
+    <div class="wikibar">
+      <span class="wikiico">🔎</span>
+      <input id="wikiQ" type="search" placeholder="Search any topic — black holes, the Mughal Empire, photosynthesis…" autocomplete="off" aria-label="Search Wikipedia">
+      <button id="wikiGo">SEARCH</button>
+    </div>
+    <div class="wikihint">Try:
+      <button class="wchip" data-w="Black hole"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImciPjxzdG9wIHN0b3AtY29sb3I9IiMwMDAiIG9mZnNldD0iLjM0Ii8+PHN0b3Agc3RvcC1jb2xvcj0iIzdiNGNmZiIgb2Zmc2V0PSIuNDIiLz48c3RvcCBzdG9wLWNvbG9yPSIjZmY4YTNkIiBvZmZzZXQ9Ii41OCIvPjxzdG9wIHN0b3AtY29sb3I9IiMxMTEiIG9mZnNldD0iLjc4Ii8+PHN0b3Agc3RvcC1jb2xvcj0iIzAyMDMwYSIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDIwMzBhIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmOGEzZCIgc3Ryb2tlLXdpZHRoPSI5IiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjQyIiBmaWxsPSJ1cmwoI2cpIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMTgiIGZpbGw9IiMwMDAiLz48Y2lyY2xlIGN4PSIyOCIgY3k9IjI4IiByPSIxLjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI5MSIgY3k9IjMxIiByPSIxIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iOTQiIGN5PSI4NyIgcj0iMS40IiBmaWxsPSIjZmZmIi8+PC9zdmc+" alt="" loading="eager" decoding="sync">Black hole</button>
+      <button class="wchip" data-w="Photosynthesis"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2I4ZmY3OCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE2OGE0YiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMDYyNTFhIi8+PGNpcmNsZSBjeD0iODgiIGN5PSIyOCIgcj0iMTgiIGZpbGw9IiNmZmQ5NWEiLz48cGF0aCBkPSJNNTcgMTA2QzQ4IDgzIDUxIDYyIDY2IDQ4YzgtNyAxNy05IDI0LTgtMSAxMy03IDI1LTE4IDMyLTcgNS0xMCA4LTE1IDE0eiIgZmlsbD0idXJsKCNnKSIvPjxwYXRoIGQ9Ik01NyAxMDRDNjcgODAgNzcgNjIgOTQgNDNNNTkgODRjLTEwLTQtMTktMTEtMjQtMjIgMTAtMiAyMCAwIDI3IDcgNSA1IDYgMTAgNiAxNXoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzczZDY2YiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMzEgMTAxaDY2IiBzdHJva2U9IiMzY2NmNzgiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+" alt="" loading="eager" decoding="sync">Photosynthesis</button>
+      <button class="wchip" data-w="Mughal Empire"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzE4MjAyYiIvPjxyZWN0IHg9IjE1IiB5PSI3NiIgd2lkdGg9IjkwIiBoZWlnaHQ9IjI1IiBmaWxsPSIjY2FhNDViIi8+PHBhdGggZD0iTTIzIDc2VjUxaDEwdjI1TTQzIDc2VjQ1aDEwdjMxTTYzIDc2VjM5aDEwdjM3TTgzIDc2VjUxaDE0djI1IiBmaWxsPSIjZDhiODZiIi8+PHBhdGggZD0iTTQyIDQ1cTE4LTMwIDM2IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U2Y2E4NCIgc3Ryb2tlLXdpZHRoPSI3Ii8+PGNpcmNsZSBjeD0iNjAiIGN5PSIyNSIgcj0iNiIgZmlsbD0iI2YwZDU4YiIvPjxwYXRoIGQ9Ik0xNSAxMDFoOTAiIHN0cm9rZT0iIzhhNjgzNCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PC9zdmc+" alt="" loading="eager" decoding="sync">Mughal Empire</button>
+      <button class="wchip" data-w="Solar System"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzAyMDYxMSIvPjxjaXJjbGUgY3g9IjU4IiBjeT0iNjAiIHI9IjEzIiBmaWxsPSIjZmZkMzRkIi8+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjU3MDhhIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii44Ij48ZWxsaXBzZSBjeD0iNTgiIGN5PSI2MCIgcng9IjI1IiByeT0iMTAiLz48ZWxsaXBzZSBjeD0iNTgiIGN5PSI2MCIgcng9IjM5IiByeT0iMTciLz48ZWxsaXBzZSBjeD0iNTgiIGN5PSI2MCIgcng9IjUzIiByeT0iMjUiLz48L2c+PGcgZmlsbD0iI2ZmZiI+PGNpcmNsZSBjeD0iODMiIGN5PSI1MyIgcj0iMi41Ii8+PGNpcmNsZSBjeD0iOTYiIGN5PSI3MiIgcj0iMy41Ii8+PGNpcmNsZSBjeD0iMzgiIGN5PSI0MiIgcj0iMiIvPjxjaXJjbGUgY3g9IjI3IiBjeT0iNzAiIHI9IjEuOCIvPjwvZz48Y2lyY2xlIGN4PSI5NiIgY3k9IjcyIiByPSI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNjNmE1NmEiIHN0cm9rZS13aWR0aD0iMS41Ii8+PC9zdmc+" alt="" loading="eager" decoding="sync">Solar System</button>
+      <button class="wchip" data-w="Human brain"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iIzI1MTIxYiIvPjxwYXRoIGQ9Ik01OSA5NGMtMjAgMC0zMy0xMi0zMy0yOSAwLTkgNC0xNSAxMC0xOS0yLTEzIDgtMjMgMjAtMjIgNy04IDIyLTcgMjcgMiAxMiAwIDIwIDkgMTggMjAgNyA2IDggMTggMiAyNi0yIDE0LTEzIDIyLTI4IDIyeiIgZmlsbD0iI2U1OGM5YiIgc3Ryb2tlPSIjZmZiM2JmIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNTggMjd2NjZNMzkgMzljOSA0IDEwIDEyIDQgMThNNzggNDBjLTggNS04IDEyLTIgMTdNMzYgNzBjOS0zIDE0IDIgMTMgMTBNNzggNjdjLTgtMi0xMyAzLTEyIDExIiBmaWxsPSJub25lIiBzdHJva2U9IiNhOTRmNjkiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+" alt="" loading="eager" decoding="sync">Human brain</button>
+      <button class="wchip" data-w="Quantum mechanics"><img class="wthumb" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9InEiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9Ii4xMiIgc3RvcC1jb2xvcj0iIzdlZTdmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE4M2I3YSIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiMwNTA4MTciLz48ZWxsaXBzZSBjeD0iNjAiIGN5PSI2MCIgcng9IjQzIiByeT0iMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY1ZDlmZiIgc3Ryb2tlLXdpZHRoPSIyIiB0cmFuc2Zvcm09InJvdGF0ZSgyNSA2MCA2MCkiLz48ZWxsaXBzZSBjeD0iNjAiIGN5PSI2MCIgcng9IjQzIiByeT0iMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I3N2NmZiIgc3Ryb2tlLXdpZHRoPSIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUgNjAgNjApIi8+PGNpcmNsZSBjeD0iNjAiIGN5PSI2MCIgcj0iMjIiIGZpbGw9InVybCgjcSkiLz48ZyBmaWxsPSIjZmZmIj48Y2lyY2xlIGN4PSIyNSIgY3k9IjQ3IiByPSIyIi8+PGNpcmNsZSBjeD0iOTMiIGN5PSI3NiIgcj0iMiIvPjxjaXJjbGUgY3g9Ijc0IiBjeT0iMjkiIHI9IjEuNyIvPjwvZz48L3N2Zz4=" alt="" loading="eager" decoding="sync">Quantum mechanics</button>
+    </div>
+    <div class="wikigrid" id="wikiGrid"><button class="wcard wsuggest" data-t="Black hole"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/First%20image%20of%20our%20black%20hole%20(with%20wider%20background)%20(eso2208-eht-mwh).jpg?width=900" alt="Black hole" loading="eager" decoding="sync"><div class="wb"><h4>Black hole</h4><p>A region of spacetime where gravity is extraordinarily strong.</p></div></button><button class="wcard wsuggest" data-t="Photosynthesis"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Photosynthesis%20(5812286809).jpg?width=900" alt="Photosynthesis" loading="eager" decoding="sync"><div class="wb"><h4>Photosynthesis</h4><p>How plants and other organisms capture light energy.</p></div></button><button class="wcard wsuggest" data-t="Mughal Empire"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Portrait%20of%20Akbar%20by%20Manohar.jpg?width=700" alt="Mughal Empire" loading="eager" decoding="sync"><div class="wb"><h4>Mughal Empire</h4><p>A major empire that shaped the history of South Asia.</p></div></button><button class="wcard wsuggest" data-t="Solar System"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20Solar%20System.jpg?width=900" alt="Solar System" loading="eager" decoding="sync"><div class="wb"><h4>Solar System</h4><p>The Sun and the worlds, moons and objects around it.</p></div></button><button class="wcard wsuggest" data-t="Human brain"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Human%20Brain.jpg?width=700" alt="Human brain" loading="eager" decoding="sync"><div class="wb"><h4>Human brain</h4><p>The complex organ responsible for thought, memory and perception.</p></div></button><button class="wcard wsuggest" data-t="Quantum mechanics"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Animation%20of%20quantum%20mechanics.gif?width=700" alt="Quantum mechanics" loading="eager" decoding="sync"><div class="wb"><h4>Quantum mechanics</h4><p>The physics framework describing matter and energy at tiny scales.</p></div></button></div>
+  </div>
+</section>
+
+<section id="modes">
+  <div class="sect-head reveal"><div class="tag">01 / SUBJECT MODES</div>
+    <h2>Choose your world</h2>
+    <p>Every mode rewires the colour, the light and the language of this interface. Pick a subject and watch the universe repaint itself around your question.</p></div>
+  <div class="modes" id="modeGrid"></div>
+</section>
+
+<section id="explorer">
+  <div class="sect-head reveal"><div class="tag">02 / 3D EXPLORER</div>
+    <h2>Touch the knowledge</h2>
+    <p>Drag to rotate, scroll or pinch to zoom. Built-in models of the human body, the Earth and the Solar System — each one alive and interactive.</p></div>
+  <div class="explorer reveal">
+    <div class="ex-tabs" id="exTabs"></div>
+    <canvas id="gl"></canvas>
+    <div class="ex-hud">
+      <div class="info" id="exInfo"></div>
+      <div class="hint">DRAG · ROTATE &nbsp;|&nbsp; SCROLL · ZOOM</div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="sect-head reveal"><div class="tag">03 / INTERACTIVE HISTORY</div>
+    <h2>1600 → 2026, one thread</h2>
+    <p>Seventy landmark events, from Sekigahara to the age of generative AI. Search, filter by era, and tap any event to unfold what happened and why it mattered.</p></div>
+  <div class="tl-tools reveal">
+    <input id="tlSearch" placeholder="Search events, people, places…">
+    <select id="tlSort"><option value="asc">Oldest first</option><option value="desc">Newest first</option></select>
+  </div>
+  <div class="era-btns reveal" id="eraBtns"></div>
+  <div class="tl-count" id="tlCount"></div>
+  <div class="timeline reveal" id="timelineList"></div>
+</section>
+
+<section id="lab">
+  <div class="sect-head reveal"><div class="tag">04 / DIAGRAM &amp; EXPERIMENT LAB</div>
+    <h2>Don't just read it — run it</h2>
+    <p>Maths and science explained with live diagrams and virtual experiments. Change a variable and watch the law of nature respond in real time.</p></div>
+  <div class="lab reveal">
+    <div class="lab-tabs" id="labTabs"></div>
+    <div class="lab-body" id="labBody"></div>
+  </div>
+</section>
+
+<section id="languages">
+  <div class="sect-head reveal"><div class="tag">05 / LANGUAGES</div>
+    <h2>Essays in twelve tongues</h2>
+    <p>Informatica composes essays, letters and compositions with correct grammar across the world's great languages. Tap a language to see it write.</p></div>
+  <div class="lang-grid reveal" id="langGrid"></div>
+  <div class="sample reveal" id="langSample"></div>
+</section>
+
+<section id="literature">
+  <div class="sect-head reveal"><div class="tag">06 / WORLD LITERATURE</div>
+    <h2>Every story ever told</h2>
+    <p>From the Mahabharata to One Hundred Years of Solitude — themes, symbols, context and analysis across civilisations and centuries.</p></div>
+  <div class="lit-grid reveal" id="litGrid"></div>
+</section>
+
+<section id="about">
+  <div class="about reveal">
+    <div class="tag" style="font-family:'Space Mono';color:var(--accent);letter-spacing:5px;font-size:.72rem">07 / THE CREATOR</div>
+    <h2 style="font-family:'Orbitron';margin:14px 0 4px;font-size:1.3rem">Built to be a student's heaven</h2>
+    <div class="sig">Rishaan Sarkar</div>
+    <p>Informatica was imagined and created by <b style="color:var(--accent)">Rishaan Sarkar</b> — an interface where curiosity is answered in words, in three dimensions, and in the beauty of discovery. Ask Informatica who made it, and it will always answer: Rishaan Sarkar.</p>
+  </div>
+</section>
+</main>
+
+<div class="wpanel" id="wikiPanel" role="dialog" aria-modal="true" aria-label="Wikipedia topic"><div class="wpanel-card" id="wikiCard"></div></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Detail"><div class="modal-card" id="modalCard"></div></div>
+<footer>INFORMATICA v2.7.0 · created by Rishaan Sarkar · answer anything, understand everything</footer>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+
+</script>
+<script>
+/* ================= MILKY WAY GALAXY BACKGROUND ================= */
+(function(){
+  const c=document.getElementById('galaxyCanvas'); if(!c)return;
+  const ctx=c.getContext('2d',{alpha:true});
+  if(!ctx)return;
+  let W=0,H=0,DPR=1,raf=0,particles=[],dust=[],stars=[],clouds=[],clusters=[];
+  const TAU=Math.PI*2;
+  const reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const R=Math.random;
+  function randn(){let u=0,v=0;while(!u)u=R();while(!v)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v);}
+  function resize(){
+    W=innerWidth; H=innerHeight; DPR=Math.min(devicePixelRatio||1,2);
+    c.width=Math.max(1,Math.floor(W*DPR)); c.height=Math.max(1,Math.floor(H*DPR));
+    c.style.width=W+'px'; c.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    const area=W*H, mobile=W<700;
+    const count=Math.min(mobile?700:1450,Math.max(mobile?420:800,Math.floor(area/(mobile?1900:1200))));
+    const arms=4;
+    particles=[]; dust=[]; stars=[]; clouds=[]; clusters=[];
+    for(let i=0;i<count;i++){
+      const arm=i%arms, r=Math.pow(R(),.64)*1.04;
+      const armCurve=r*TAU*1.72;
+      const spread=randn()*(.035+.12*r);
+      const a=armCurve+arm*TAU/arms+spread;
+      particles.push({r,a,z:randn()*.045,size:R()<.035?1.5+R()*2.4:.28+R()*1.2,
+        alpha:.14+R()*.72,phase:R()*TAU,twinkle:.5+R()*2,speed:.0007+R()*.0018,
+        warm:R()<.13});
+    }
+    const dustCount=Math.min(mobile?180:520,Math.max(mobile?90:220,Math.floor(area/4700)));
+    for(let i=0;i<dustCount;i++){
+      const r=Math.pow(R(),.78)*1.12, arm=Math.floor(R()*arms);
+      const a=r*TAU*1.7+arm*TAU/arms+randn()*(.08+.22*r);
+      dust.push({r,a,z:randn()*.12,size:.4+R()*2.8,alpha:.012+R()*.075,
+        warm:R()<.18});
+    }
+    const starCount=Math.min(mobile?160:360,Math.max(110,Math.floor(area/8500)));
+    for(let i=0;i<starCount;i++) stars.push({x:R(),y:R(),r:.18+R()*1.15,a:.12+R()*.62,phase:R()*TAU,tw:.3+R()*1.5});
+    for(let i=0;i<(mobile?20:42);i++) clouds.push({r:Math.pow(R(),.7)*1.02,a:R()*TAU,rx:.035+R()*.14,ry:.015+R()*.055,alpha:.018+R()*.045,warm:R()<.2});
+    for(let i=0;i<(mobile?10:24);i++){ const cl={r:.2+R()*.75,a:R()*TAU,spread:.01+R()*.035,n:5+Math.floor(R()*13),phase:R()*TAU,pts:[]}; for(let j=0;j<cl.n;j++) cl.pts.push({da:randn()*cl.spread,dr:randn()*.018}); clusters.push(cl); }
+  }
+  function starDot(px,py,r,alpha,warm){
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle=warm?'rgba(255,218,178,1)':'rgba(215,235,255,1)';
+    ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    const cx=W*.5, cy=H*.5, scale=Math.min(W,H)*.56;
+    const motion=reduced?0:t;
+    /* Vast, faint Milky-Way band behind the stars. */
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(-.19); ctx.scale(1,.43);
+    const band=ctx.createRadialGradient(0,0,scale*.05,0,0,scale*1.05);
+    band.addColorStop(0,'rgba(215,230,255,.075)'); band.addColorStop(.16,'rgba(125,165,235,.045)');
+    band.addColorStop(.48,'rgba(80,115,190,.022)'); band.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=band;ctx.beginPath();ctx.arc(0,0,scale*1.05,0,TAU);ctx.fill();
+    /* soft blue/purple star-forming clouds */
+    ctx.globalCompositeOperation='lighter';
+    for(const q of clouds){
+      const a=q.a+motion*.000012*(q.r+1), rr=q.r*scale;
+      const px=Math.cos(a)*rr, py=Math.sin(a)*rr;
+      const g=ctx.createRadialGradient(px,py,0,px,py,scale*q.rx*2.2);
+      g.addColorStop(0,q.warm?'rgba(255,165,120,.08)':'rgba(125,165,255,.075)');
+      g.addColorStop(.4,q.warm?'rgba(255,90,160,.035)':'rgba(100,90,255,.035)');
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;ctx.globalAlpha=q.alpha;ctx.beginPath();ctx.ellipse(px,py,scale*q.rx,scale*q.ry,0,0,TAU);ctx.fill();
+    }
+    /* Dust lanes make the disk feel organic rather than like a perfect geometric spiral. */
+    for(const d of dust){
+      const a=d.a+motion*.000006*(d.r+.3), rr=d.r*scale;
+      const px=Math.cos(a)*rr, py=Math.sin(a)*rr*(.9+d.z);
+      ctx.globalAlpha=d.alpha;
+      ctx.fillStyle=d.warm?'rgba(255,150,105,1)':'rgba(85,125,210,1)';
+      ctx.beginPath();ctx.arc(px,py,d.size,0,TAU);ctx.fill();
+    }
+    /* Dense luminous spiral arms. */
+    for(const p of particles){
+      const a=p.a+motion*p.speed*0.22, rr=p.r*scale;
+      const px=Math.cos(a)*rr, py=Math.sin(a)*rr*(.9+p.z);
+      const pulse=.62+.38*Math.sin(motion*.001*p.twinkle+p.phase);
+      ctx.globalAlpha=p.alpha*pulse;
+      ctx.fillStyle=p.warm?'rgba(255,214,185,1)':'rgba(150,195,255,1)';
+      ctx.beginPath();ctx.arc(px,py,p.size*(.72+.42*pulse),0,TAU);ctx.fill();
+    }
+    /* Star clusters: irregular knots along the arms. */
+    for(const cl of clusters){
+      const base=cl.a+motion*.000045*(.4+cl.r), rr=cl.r*scale;
+      for(let j=0;j<cl.pts.length;j++){
+        const pt=cl.pts[j], aa=base+pt.da, r2=rr*(1+pt.dr);
+        const px=Math.cos(aa)*r2,py=Math.sin(aa)*r2*(.9+pt.dr*.4);
+        const tw=.78+.22*Math.sin(motion*.00055+cl.phase+j);
+        starDot(px,py,.35+(j%3)*.22,.15*tw,j%9===0);
+      }
+    }
+    /* Central bulge + bright galactic core. */
+    const bulge=ctx.createRadialGradient(0,0,0,0,0,scale*.31);
+    bulge.addColorStop(0,'rgba(255,255,255,.9)');bulge.addColorStop(.018,'rgba(235,248,255,.8)');
+    bulge.addColorStop(.07,'rgba(185,215,255,.34)');bulge.addColorStop(.22,'rgba(120,150,255,.11)');bulge.addColorStop(1,'rgba(40,55,140,0)');
+    ctx.globalAlpha=1;ctx.fillStyle=bulge;ctx.beginPath();ctx.arc(0,0,scale*.31,0,TAU);ctx.fill();
+    const core=ctx.createRadialGradient(0,0,0,0,0,scale*.075);
+    core.addColorStop(0,'rgba(255,255,255,1)');core.addColorStop(.13,'rgba(225,245,255,.96)');
+    core.addColorStop(.4,'rgba(160,205,255,.45)');core.addColorStop(1,'rgba(75,120,255,0)');
+    ctx.fillStyle=core;ctx.beginPath();ctx.arc(0,0,scale*.075,0,TAU);ctx.fill();
+    ctx.restore();
+    /* Foreground stars stay screen-space, giving depth/parallax without affecting the app. */
+    ctx.globalCompositeOperation='lighter';
+    for(const s of stars){
+      const tw=.5+.5*Math.sin(motion*.0009*s.tw+s.phase);
+      starDot(s.x*W,s.y*H,s.r,.22+s.a*.55*tw,false);
+    }
+    ctx.globalCompositeOperation='source-over';
+    raf=requestAnimationFrame(draw);
+  }
+  addEventListener('resize',resize,{passive:true});
+  resize(); raf=requestAnimationFrame(draw);
+})();
+</script>
+<script>
+/* ================= PARTICLE STARFIELD ================= */
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');let W,H,P=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;P=[];const n=Math.min(190,Math.floor(W/9));
+    for(let i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.7+.3,s:Math.random()*1.7+.3,v:Math.random()*.25+.05});}
+  addEventListener('resize',resize);resize();
+  function accent(){const s=getComputedStyle(document.documentElement);return s.getPropertyValue('--accent').trim()||'#38e8ff';}
+  function loop(){x.clearRect(0,0,W,H);const a=accent();
+    for(const p of P){p.y-=p.v*p.z;if(p.y<0){p.y=H;p.x=Math.random()*W;}
+      x.globalAlpha=.15+p.z*.55;x.fillStyle=a;x.beginPath();x.arc(p.x,p.y,p.s*p.z,0,7);x.fill();}
+    x.globalAlpha=1;requestAnimationFrame(loop);}
+  loop();
+})();
+
+/* ================= SCROLL REVEAL ================= */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ================= MODES ================= */
+const MODES=[
+ {id:'informatica',ico:'✦',name:'General',desc:'Ask anything, any subject',c:'#38e8ff',tag:'every subject, one mind',model:'earth',lab:'proj',prompts:['Explain photosynthesis','Why is the sky blue?','What caused World War I?']},
+ {id:'maths',ico:'∑',name:'Maths',desc:'Algebra, calculus, geometry, proofs',c:'#5b8cff',tag:'numbers, shapes and proof',model:'earth',lab:'pyth',prompts:['Prove Pythagoras','Solve 2x² + 5x − 3 = 0','What is a derivative?']},
+ {id:'physics',ico:'⚛',name:'Physics',desc:'Motion, forces, energy, the cosmos',c:'#ff9f1c',tag:'the laws that move the universe',model:'solar',lab:'proj',prompts:['Explain projectile motion','What is gravity?','How do orbits work?']},
+ {id:'chemistry',ico:'⚗',name:'Chemistry',desc:'Atoms, bonds, reactions, molecules',c:'#2ee6a8',tag:'atoms, bonds and reactions',model:'solar',lab:'mol',prompts:['Why is water bent?','Balance a combustion reaction','What is a covalent bond?']},
+ {id:'biology',ico:'🧬',name:'Biology',desc:'Cells, genetics, the human body',c:'#7dff9b',tag:'the machinery of life',model:'human',lab:'mol',prompts:['How does the heart pump?','Explain DNA replication','What is natural selection?']},
+ {id:'history',ico:'🏛',name:'History',desc:'Civilisations, wars, revolutions',c:'#ffb26b',tag:'1600 to today, one thread',model:'earth',lab:'pyth',prompts:['What was the French Revolution?','Causes of World War II','The Space Race']},
+ {id:'geography',ico:'🌍',name:'Geography',desc:'Earth, climate, maps, peoples',c:'#3ec9ff',tag:'planet, climate and peoples',model:'earth',lab:'proj',prompts:['Explain plate tectonics','Why do monsoons happen?','Layers of the atmosphere']},
+ {id:'english',ico:'✒',name:'English',desc:'Grammar, essays, literature, poetry',c:'#ff6fb5',tag:'words, stories and argument',model:'human',lab:'pyth',prompts:['Write an essay on friendship','Analyse Hamlet','Active vs passive voice']},
+ {id:'languages',ico:'🈯',name:'Languages',desc:'Compositions in 12 world languages',c:'#b07cff',tag:'twelve tongues, one voice',model:'earth',lab:'pyth',prompts:['Write an essay in Hindi','Translate this to French','A letter in Japanese']}
+];
+const modeGrid=document.getElementById('modeGrid');
+const modeDock=document.getElementById('modeDock');
+let toastT=null;
+function toast(msg){let el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.className='toast';document.body.appendChild(el);}
+  el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2400);}
+MODES.forEach(m=>{
+  const d=document.createElement('div');d.className='mode';d.dataset.mode=m.id;d.style.setProperty('--m',m.c);
+  d.innerHTML=`<div class="ico">${m.ico}</div><h3>${m.name}</h3><p>${m.desc}</p>`;
+  d.onclick=()=>setMode(m.id);
+  modeGrid.appendChild(d);
+  const b=document.createElement('button');b.className='dockbtn';b.dataset.mode=m.id;b.textContent=m.ico+' '+m.name;
+  b.onclick=()=>setMode(m.id);
+  modeDock.appendChild(b);
+});
+function setMode(id){
+  const m=MODES.find(x=>x.id===id);if(!m)return;
+  document.documentElement.setAttribute('data-theme',m.id);window.__mode=m.id;
+  document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===id));
+  document.querySelectorAll('.dockbtn').forEach(x=>x.classList.toggle('active',x.dataset.mode===id));
+  const hs=document.getElementById('heroSub');
+  if(hs)hs.innerHTML='<b style="color:var(--accent)">'+m.name+' mode</b> — '+m.tag+'. Ask a question and Informatica answers in text, then shows it in three dimensions.';
+  const hp=document.getElementById('heroPrompts');
+  if(hp){hp.innerHTML=m.prompts.map(p=>`<button class="prompt">${p}</button>`).join('');
+    hp.querySelectorAll('.prompt').forEach((btn,i)=>btn.onclick=()=>{
+      if(navigator.clipboard)navigator.clipboard.writeText(m.prompts[i]).catch(()=>{});
+      toast('“'+m.prompts[i]+'” copied — paste it into the chat to ask Informatica');
+    });}
+  if(typeof EX!=='undefined'&&typeof showEx==='function'&&typeof GROUPS!=='undefined'&&Object.keys(GROUPS).length){
+    activeEx=m.model;
+    const idx=EX.findIndex(e=>e.id===m.model);
+    document.querySelectorAll('.ex-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
+    showEx();
+  }
+  if(typeof LABS!=='undefined'&&typeof openLab==='function'){
+    const li=LABS.findIndex(l=>l.id===m.lab);
+    if(li>=0){document.querySelectorAll('.lab-tab').forEach((b,i)=>b.classList.toggle('active',i===li));openLab(m.lab);}
+  }
+  if(typeof updateChatMode==='function')updateChatMode(m);
+}
+
+/* ================= 3D EXPLORER ================= */
+const EX=[
+ {id:'human',name:'HUMAN BODY',info:'<b>Human Body</b> — a stylised anatomical figure. Drag to rotate. The heart pulses at the centre of the chest; limbs are modelled as articulated segments.'},
+ {id:'earth',name:'EARTH',info:'<b>Earth</b> — a procedurally textured globe with a drifting cloud layer, a glowing atmosphere and an orbiting Moon.'},
+ {id:'solar',name:'SOLAR SYSTEM',info:'<b>Solar System</b> — the Sun and eight planets in orbit. Saturn carries its rings; the inner worlds race, the outer giants drift.'}
+];
+let activeEx='human';
+const exTabs=document.getElementById('exTabs');
+EX.forEach((e,i)=>{const b=document.createElement('button');b.className='ex-tab'+(i===0?' active':'');b.textContent=e.name;
+  b.onclick=()=>{activeEx=e.id;document.querySelectorAll('.ex-tab').forEach(t=>t.classList.remove('active'));b.classList.add('active');showEx();};
+  exTabs.appendChild(b);});
+function showEx(){document.getElementById('exInfo').innerHTML=EX.find(e=>e.id===activeEx).info;
+  for(const k in GROUPS)GROUPS[k].visible=(k===activeEx);if(GROUPS[activeEx])GROUPS[activeEx].rotation.set(0,0,0);}
+
+let renderer,scene,camera,root,GROUPS={},earthClouds,moonPivot,planets=[];
+const canvas=document.getElementById('gl');
+function initGL(){
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(48,1,.1,1000);camera.position.set(0,1.5,11);
+  scene.add(new THREE.AmbientLight(0x8899ff,.9));
+  const d=new THREE.DirectionalLight(0xffffff,1.25);d.position.set(6,9,8);scene.add(d);
+  const p=new THREE.PointLight(0x66ccff,1.2,60);p.position.set(-8,4,6);scene.add(p);
+  root=new THREE.Group();scene.add(root);
+  GROUPS.human=buildHuman();GROUPS.earth=buildEarth();GROUPS.solar=buildSolar();
+  root.add(GROUPS.human,GROUPS.earth,GROUPS.solar);
+  showEx();
+  resize();loopGL();
+  // interaction
+  let drag=false,px=0,py=0,ry=0,rx=0,tRy=0,tRx=0;
+  canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});
+  canvas.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;
+    tRy+=dx*.008;tRx+=dy*.006;tRx=Math.max(-1.1,Math.min(1.1,tRx));});
+  addEventListener('pointerup',()=>drag=false);
+  canvas.addEventListener('wheel',e=>{e.preventDefault();camera.position.z=Math.max(4.5,Math.min(24,camera.position.z+e.deltaY*.01));},{passive:false});
+  window.__applyRot=()=>{ry+=(tRy-ry)*.12;rx+=(tRx-rx)*.12;root.rotation.y=ry;root.rotation.x=rx;};
+}
+function resize(){const w=canvas.clientWidth||canvas.parentElement.clientWidth,h=canvas.clientHeight||520;
+  renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+addEventListener('resize',()=>{if(renderer)resize()});
+
+function bodyMat(color,op){return new THREE.MeshStandardMaterial({color,roughness:.45,metalness:.35,transparent:op<1,opacity:op})}
+function buildHuman(){
+  const g=new THREE.Group();
+  const a=new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#38e8ff');
+  const skin=bodyMat(0x9fd8ff,1), core=new THREE.MeshStandardMaterial({color:0x6ec6ff,emissive:0x1b6fae,emissiveIntensity:.5,roughness:.4,metalness:.5});
+  function seg(r1,r2,h,mat){return new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,20),mat)}
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.52,28,28),skin);head.position.y=3.55;g.add(head);
+  const eyes=new THREE.Mesh(new THREE.SphereGeometry(.53,20,20),new THREE.MeshStandardMaterial({color:0x0a1a2a,transparent:true,opacity:.12}));eyes.position.y=3.55;g.add(eyes);
+  const neck=seg(.16,.18,.42,core);neck.position.y=2.95;g.add(neck);
+  const torso=seg(.72,.86,1.9,skin);torso.position.y=1.95;g.add(torso);
+  const chest=new THREE.Mesh(new THREE.SphereGeometry(.74,24,24),core);chest.scale.set(1,.62,.72);chest.position.y=2.5;g.add(chest);
+  const hips=new THREE.Mesh(new THREE.SphereGeometry(.62,24,24),skin);hips.scale.set(1,.6,.8);hips.position.y=.95;g.add(hips);
+  // arms
+  const armDefs=[[-1,.55],[1,.55]];
+  armDefs.forEach(([sx,zoff])=>{
+    const sh=new THREE.Mesh(new THREE.SphereGeometry(.24,18,18),core);sh.position.set(sx*.95,2.72,0);g.add(sh);
+    const ua=seg(.16,.14,.95,skin);ua.position.set(sx*1.05,2.2,0);ua.rotation.z=sx*.22;g.add(ua);
+    const fa=seg(.13,.11,.9,skin);fa.position.set(sx*1.2,1.3,0);fa.rotation.z=sx*.12;g.add(fa);
+    const hand=new THREE.Mesh(new THREE.SphereGeometry(.16,16,16),core);hand.position.set(sx*1.28,.82,0);g.add(hand);
+  });
+  // legs
+  [-1,1].forEach(sx=>{
+    const th=seg(.22,.18,1.15,skin);th.position.set(sx*.34,.15,0);g.add(th);
+    const sh=seg(.17,.13,1.1,skin);sh.position.set(sx*.34,-1.1,0);g.add(sh);
+    const ft=new THREE.Mesh(new THREE.SphereGeometry(.18,16,16),core);ft.scale.set(1,.6,1.5);ft.position.set(sx*.34,-1.72,.14);g.add(ft);
+  });
+  // heart
+  const heart=new THREE.Mesh(new THREE.SphereGeometry(.2,18,18),new THREE.MeshStandardMaterial({color:0xff3b6b,emissive:0xff2a55,emissiveIntensity:.9}));
+  heart.position.set(-.12,2.35,.35);g.add(heart);g.userData.heart=heart;
+  // wireframe aura
+  const aura=new THREE.Mesh(new THREE.SphereGeometry(2.6,20,16),new THREE.MeshBasicMaterial({color:a,wireframe:true,transparent:true,opacity:.07}));
+  aura.position.y=1.6;g.add(aura);
+  g.position.y=-1.1;g.scale.setScalar(.95);
+  return g;
+}
+function earthTexture(){
+  const c=document.createElement('canvas');c.width=1024;c.height=512;const x=c.getContext('2d');
+  const grd=x.createLinearGradient(0,0,0,512);grd.addColorStop(0,'#0a3b6b');grd.addColorStop(.5,'#0e5a9c');grd.addColorStop(1,'#0a3b6b');
+  x.fillStyle=grd;x.fillRect(0,0,1024,512);
+  x.fillStyle='#2e8b57';
+  for(let i=0;i<150;i++){const cx=Math.random()*1024,cy=80+Math.random()*352,r=18+Math.random()*70;
+    x.beginPath();for(let a=0;a<Math.PI*2;a+=.4){const rr=r*(.6+Math.random()*.6);x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*.6);}x.closePath();x.fillStyle=Math.random()>.3?'#2e8b57':'#4a7c3f';x.fill();}
+  x.fillStyle='rgba(240,248,255,.9)';x.fillRect(0,0,1024,26);x.fillRect(0,486,1024,26);
+  x.fillStyle='rgba(255,255,255,.12)';for(let i=0;i<90;i++)x.fillRect(Math.random()*1024,Math.random()*512,Math.random()*90+20,Math.random()*4+1);
+  const t=new THREE.CanvasTexture(c);t.anisotropy=4;return t;
+}
+function buildEarth(){
+  const g=new THREE.Group();
+  const earth=new THREE.Mesh(new THREE.SphereGeometry(2,64,64),new THREE.MeshStandardMaterial({map:earthTexture(),roughness:.85,metalness:.05}));
+  g.add(earth);
+  earthClouds=new THREE.Mesh(new THREE.SphereGeometry(2.04,48,48),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:.28,roughness:1}));
+  g.add(earthClouds);
+  const atm=new THREE.Mesh(new THREE.SphereGeometry(2.22,48,48),new THREE.MeshBasicMaterial({color:0x4fb8ff,transparent:true,opacity:.16,side:THREE.BackSide}));
+  g.add(atm);
+  const mp=new THREE.Group();const moon=new THREE.Mesh(new THREE.SphereGeometry(.32,28,28),new THREE.MeshStandardMaterial({color:0xbfc6d4,roughness:.95}));
+  moon.position.x=3.9;mp.add(moon);mp.rotation.x=.2;g.add(mp);moonPivot=mp;
+  g.position.y=0;return g;
+}
+function buildSolar(){
+  const g=new THREE.Group();g.position.y=.2;
+  const sun=new THREE.Mesh(new THREE.SphereGeometry(1.15,40,40),new THREE.MeshBasicMaterial({color:0xffcf5c}));
+  g.add(sun);
+  const halo=new THREE.Mesh(new THREE.SphereGeometry(1.7,32,32),new THREE.MeshBasicMaterial({color:0xffa726,transparent:true,opacity:.22}));
+  g.add(halo);
+  const sl=new THREE.PointLight(0xffd27a,2.2,60);g.add(sl);
+  const defs=[[0x9e9e9e,2.0,.030,.42],[0xe8c88a,2.7,.024,.55],[0x4aa3ff,3.5,.019,.58],[0xff7043,4.3,.016,.44],
+              [0xd9a066,5.6,.012,.95],[0xe6d08a,6.6,.009,.80],[0x9fe3e8,7.6,.007,.70],[0x4f7cff,8.7,.005,.68]];
+  defs.forEach((d,i)=>{const pivot=new THREE.Group();
+    const p=new THREE.Mesh(new THREE.SphereGeometry(d[3],32,32),new THREE.MeshStandardMaterial({color:d[0],roughness:.7,metalness:.2}));
+    p.position.x=d[1];pivot.add(p);
+    if(i===5){const ring=new THREE.Mesh(new THREE.RingGeometry(d[3]*1.4,d[3]*2.1,48),new THREE.MeshBasicMaterial({color:0xd9c08a,side:THREE.DoubleSide,transparent:true,opacity:.7}));
+      ring.rotation.x=1.2;pivot.add(ring);}
+    const orbit=new THREE.Mesh(new THREE.RingGeometry(d[1]-.012,d[1]+.012,90),new THREE.MeshBasicMaterial({color:0x6fa8ff,side:THREE.DoubleSide,transparent:true,opacity:.22}));
+    orbit.rotation.x=Math.PI/2;g.add(orbit);
+    pivot.userData.speed=d[2];pivot.rotation.y=Math.random()*6.28;planets.push(pivot);g.add(pivot);});
+  return g;
+}
+let t0=0;
+function loopGL(){
+  requestAnimationFrame(loopGL);const t=performance.now()*.001,dt=t-t0;t0=t;
+  if(window.__applyRot)window.__applyRot();
+  const acc=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#38e8ff';
+  if(activeEx!=='solar'&&!isDragging())root.rotation.y+=dt*.12;
+  if(earthClouds)earthClouds.rotation.y+=dt*.045;
+  if(moonPivot)moonPivot.rotation.y+=dt*.55;
+  planets.forEach(p=>p.rotation.y+=p.userData.speed*dt*3.2);
+  const h=GROUPS.human&&GROUPS.human.userData.heart;
+  if(h){const s=1+Math.sin(t*5.2)*.14;h.scale.setScalar(s);h.material.emissiveIntensity=.6+Math.sin(t*5.2)*.4;}
+  renderer.render(scene,camera);
+}
+function isDragging(){return false;}
+
+/* ================= TIMELINE DATA (70 EVENTS) ================= */
+const EVENTS=[
+[1600,"Battle of Sekigahara","Japan","Tokugawa Ieyasu defeats his rivals, unifying Japan and beginning 265 years of Tokugawa shogunate rule."],
+[1602,"Dutch East India Company founded","Netherlands","The VOC becomes the world's first multinational corporation and a template for global trade empires."],
+[1607,"Jamestown founded","North America","England's first permanent settlement in North America opens the era of British colonial expansion."],
+[1610,"Galileo's telescopic discoveries","Italy","Galileo observes Jupiter's moons and lunar craters, challenging the Earth-centred cosmos."],
+[1618,"Thirty Years' War begins","Europe","A religious and dynastic conflict devastates Central Europe and reshapes the balance of power."],
+[1620,"Mayflower and Plymouth","North America","Pilgrims establish Plymouth Colony, a founding myth of American settlement."],
+[1633,"Galileo tried by the Inquisition","Italy","Galileo is forced to recant heliocentrism — science and authority collide."],
+[1642,"English Civil War begins","England","Parliament and Crown go to war, ending absolute monarchy and leading to Cromwell's Commonwealth."],
+[1648,"Peace of Westphalia","Europe","Ends the Thirty Years' War and establishes the modern idea of sovereign states."],
+[1660,"Restoration of Charles II","England","The monarchy returns; the Royal Society is founded, launching organised modern science."],
+[1666,"Great Fire of London","England","The fire destroys much of London and triggers a radical rebuild by Wren and Hooke."],
+[1687,"Newton's Principia","England","Newton publishes the law of universal gravitation and the laws of motion — physics is born."],
+[1689,"Glorious Revolution & Bill of Rights","England","Parliament limits royal power, a milestone in constitutional government."],
+[1707,"Act of Union","Britain","England and Scotland unite to form the Kingdom of Great Britain."],
+[1712,"Newcomen steam engine","England","The first practical steam engine begins pumping water from mines, seeding the Industrial Revolution."],
+[1751,"Encyclopédie begins","France","Diderot and d'Alembert compile Enlightenment knowledge, spreading reason across Europe."],
+[1756,"Seven Years' War","Global","A worldwide war between European powers reshapes empires in Europe, America and India."],
+[1769,"Watt improves the steam engine","Scotland","James Watt's separate condenser makes steam power efficient and industrial."],
+[1776,"US Declaration of Independence","North America","Thirteen colonies declare independence, inspiring democratic revolutions worldwide."],
+[1789,"French Revolution begins","France","The Bastille falls; liberty, equality and fraternity challenge the old order."],
+[1799,"Napoleon takes power","France","Napoleon becomes First Consul; the Rosetta Stone is discovered, unlocking Egyptian hieroglyphs."],
+[1804,"Napoleonic Code","France","A civil law system that becomes the model for legal codes across the world."],
+[1805,"Battle of Trafalgar","Atlantic","Nelson's victory secures British naval supremacy for a century."],
+[1815,"Battle of Waterloo","Belgium","Napoleon's final defeat redraws Europe at the Congress of Vienna."],
+[1825,"First public railway opens","England","The Stockton–Darlington line launches the railway age and mass transport."],
+[1839,"First Opium War","China","Britain's war over trade forces open China and begins a century of foreign intervention."],
+[1848,"Year of Revolutions","Europe","Revolutions sweep Europe; Marx and Engels publish the Communist Manifesto."],
+[1859,"On the Origin of Species","England","Darwin presents evolution by natural selection, transforming biology."],
+[1861,"American Civil War begins","USA","The war over slavery and union becomes the deadliest conflict in American history."],
+[1865,"Civil War ends; Lincoln assassinated","USA","The Union prevails and slavery is abolished; Lincoln is shot days after Appomattox."],
+[1868,"Meiji Restoration","Japan","Japan industrialises rapidly and becomes a modern imperial power."],
+[1869,"Suez Canal opens; periodic table","Egypt / Russia","A sea route links Europe and Asia; Mendeleev organises the chemical elements."],
+[1876,"Telephone patented","USA","Alexander Graham Bell's telephone begins instant voice communication."],
+[1879,"Edison's practical light bulb","USA","Electric light begins to transform cities, homes and work."],
+[1885,"Indian National Congress founded","India","The INC becomes the platform for India's long march to independence."],
+[1893,"Women win the vote in New Zealand","New Zealand","The first self-governing country to grant women the vote."],
+[1898,"Curie discovers radium and polonium","France","Marie and Pierre Curie open the door to radioactivity and nuclear science."],
+[1903,"First powered flight","USA","The Wright brothers achieve sustained controlled flight at Kitty Hawk."],
+[1905,"Einstein's annus mirabilis","Germany","Special relativity, E=mc² and the photoelectric effect rewrite physics."],
+[1914,"World War I begins","Europe","The Great War engulfs the world and collapses four empires."],
+[1917,"Russian Revolution","Russia","The Bolsheviks seize power, creating the first communist state."],
+[1918,"World War I ends","Europe","Armistice ends the fighting; the map of Europe is redrawn."],
+[1919,"Treaty of Versailles","France","The peace terms on Germany plant the seeds of the next war."],
+[1920,"League of Nations founded","Global","The first international body to keep peace — a forerunner of the UN."],
+[1922,"Tutankhamun's tomb discovered","Egypt","Howard Carter's find ignites global fascination with ancient Egypt."],
+[1929,"Wall Street Crash","USA","The crash triggers the Great Depression across the world."],
+[1933,"Hitler comes to power","Germany","The Nazi seizure of power sets Europe on the road to catastrophe."],
+[1939,"World War II begins","Europe","Germany invades Poland; the deadliest war in history starts."],
+[1942,"Battle of Midway; Manhattan Project","Pacific / USA","The Pacific turns; the secret race to build the atomic bomb begins."],
+[1945,"World War II ends; UN founded","Global","Atomic bombs end the war; the United Nations is created to prevent another."],
+[1947,"Indian independence and Partition","India / Pakistan","The subcontinent gains freedom; partition displaces millions."],
+[1948,"Universal Declaration of Human Rights","Global","The UN affirms rights for all people; Israel is founded."],
+[1949,"People's Republic of China founded; NATO","China / Atlantic","A new China rises; the West forms a military alliance."],
+[1957,"Sputnik launched","USSR","The first artificial satellite opens the Space Age."],
+[1961,"First human in space","USSR","Yuri Gagarin orbits the Earth; the space race intensifies."],
+[1963,"March on Washington; JFK assassinated","USA","King's dream is declared; a president is killed in Dallas."],
+[1964,"US Civil Rights Act","USA","Segregation in public life is outlawed."],
+[1969,"Apollo 11 Moon landing","USA","Neil Armstrong and Buzz Aldrin walk on the Moon."],
+[1971,"Bangladesh independence","South Asia","A new nation is born after a devastating liberation war."],
+[1972,"Nixon visits China","China / USA","A historic opening reshapes Cold War geopolitics."],
+[1975,"Vietnam War ends","Vietnam","Saigon falls; the long war ends in communist victory."],
+[1979,"Iranian Revolution; Thatcher elected","Iran / Britain","A new Islamic republic; Britain's first woman prime minister."],
+[1989,"Fall of the Berlin Wall","Germany","The Wall falls; the Cold War begins to dissolve."],
+[1990,"Nelson Mandela released","South Africa","After 27 years, Mandela walks free; apartheid starts to end."],
+[1991,"Soviet Union dissolves; WWW goes public","Global","The USSR breaks up; the World Wide Web opens to everyone."],
+[1994,"End of apartheid; Mandela president","South Africa","South Africa's first democratic election elects Mandela."],
+[1995,"Windows 95; WTO founded","Global","Personal computing goes mainstream; world trade is formalised."],
+[1997,"Hong Kong returned; Dolly the sheep","China / Scotland","Hong Kong returns to China; the first cloned mammal is born."],
+[2001,"September 11 attacks","USA","Terror attacks reshape global security for two decades."],
+[2003,"Human Genome Project completed","Global","The human genetic code is mapped — a new era of medicine."],
+[2004,"Facebook founded; Indian Ocean tsunami","USA / Asia","Social media begins; a tsunami kills over 200,000."],
+[2007,"iPhone launched","USA","The smartphone era transforms how the world learns and connects."],
+[2008,"Global financial crisis","Global","Banks collapse; the worst recession since the 1930s begins."],
+[2011,"Arab Spring","Middle East","Mass protests topple regimes across the Arab world."],
+[2012,"Higgs boson discovered","Europe","CERN confirms the particle that gives matter mass."],
+[2015,"Paris Climate Agreement","Global","Nations pledge to limit global warming; the UN sets 17 SDGs."],
+[2016,"Brexit referendum","UK","Britain votes to leave the European Union."],
+[2019,"COVID-19 pandemic begins","Global","A novel coronavirus spreads worldwide, shutting down normal life."],
+[2020,"Global lockdowns; vaccines developed","Global","The world locks down; mRNA vaccines are created in record time."],
+[2021,"Vaccine rollout; COP26","Global","Mass vaccination begins; Glasgow seeks stronger climate action."],
+[2022,"Russia invades Ukraine; Webb telescope","Europe / Space","War returns to Europe; the James Webb Space Telescope reveals deep space."],
+[2023,"Generative AI boom","Global","Large language models and AI tools enter everyday life and classrooms."],
+[2024,"Record global election year","Global","Half the world's population votes; Paris hosts the Olympics."],
+[2025,"AI transforms learning and work","Global","AI tutors, agents and tools reshape education, science and industry."],
+[2026,"The present — and your chapter","Global","History is still being written. Informatica helps you understand it — and add to it."]
+];
+const ERAS=[["All","all"],["1600s","1600"],["1700s","1700"],["1800s","1800"],["1900s","1900"],["2000s","2000"]];
+let curEra="all",curQ="",curSort="asc";
+const eraBtns=document.getElementById('eraBtns');
+ERAS.forEach((e,i)=>{const b=document.createElement('button');b.className='era'+(i===0?' active':'');b.textContent=e[0];
+  b.onclick=()=>{curEra=e[1];document.querySelectorAll('.era').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderTL();};
+  eraBtns.appendChild(b);});
+document.getElementById('tlSearch').oninput=e=>{curQ=e.target.value.toLowerCase();renderTL()};
+document.getElementById('tlSort').onchange=e=>{curSort=e.target.value;renderTL()};
+function renderTL(){
+  let list=EVENTS.filter(ev=>{const y=ev[0];if(curEra!=='all'){const base=parseInt(curEra);if(y<base||y>=base+100)return false;}
+    if(curQ&&!(ev[1]+' '+ev[2]+' '+ev[3]).toLowerCase().includes(curQ))return false;return true;});
+  list.sort((a,b)=>curSort==='asc'?a[0]-b[0]:b[0]-a[0]);
+  const tl=document.getElementById('timelineList');
+  document.getElementById('tlCount').textContent=list.length+' events shown';
+  tl.innerHTML=list.map(ev=>`<div class="tl-item"><div class="yr">${ev[0]}</div><div class="tt">${ev[1]}</div><div class="rg">${ev[2]}</div><div class="ds">${ev[3]}</div></div>`).join('');
+  tl.querySelectorAll('.tl-item').forEach(it=>it.onclick=()=>it.classList.toggle('open'));
+}
+renderTL();
+
+/* ================= LAB ================= */
+const LABS=[
+ {id:'proj',name:'PROJECTILE MOTION'},
+ {id:'pend',name:'PENDULUM'},
+ {id:'pyth',name:'GEOMETRY PROOF'},
+ {id:'mol',name:'MOLECULES'}
+];
+const labTabs=document.getElementById('labTabs'),labBody=document.getElementById('labBody');
+LABS.forEach((l,i)=>{const b=document.createElement('button');b.className='lab-tab'+(i===0?' active':'');b.textContent=l.name;
+  b.onclick=()=>{document.querySelectorAll('.lab-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');openLab(l.id)};
+  labTabs.appendChild(b)});
+let labRAF=null;
+function openLab(id){
+  if(labRAF)cancelAnimationFrame(labRAF);
+  if(id==='proj')labProjectile();
+  else if(id==='pend')labPendulum();
+  else if(id==='pyth')labPyth();
+  else labMol();
+}
+function labProjectile(){
+  labBody.innerHTML=`<div><canvas id="lc-projectile" class="lab-canvas" width="620" height="380"></canvas></div>
+  <div class="ctrls"><label>LAUNCH ANGLE <span class="val" id="aV-projectile">45°</span></label><input id="ang" type="range" min="10" max="80" value="45">
+  <label>INITIAL SPEED <span class="val" id="sV">40 m/s</span></label><input id="spd" type="range" min="15" max="70" value="40">
+  <div class="readout">Range R = v²·sin(2θ)/g<br>Time of flight t = 2v·sinθ/g<br><b id="rOut"></b></div></div>`;
+  const c=document.getElementById('lc-projectile'),x=c.getContext('2d');
+  function draw(){const ang=+document.getElementById('ang').value,spd=+document.getElementById('spd').value;
+    document.getElementById('aV').textContent=ang+'°';document.getElementById('sV').textContent=spd+' m/s';
+    const g=9.81,rad=ang*Math.PI/180,vx=spd*Math.cos(rad),vy=spd*Math.sin(rad);
+    const tf=2*vy/g,R=vx*tf,H=vy*vy/(2*g);
+    document.getElementById('rOut').textContent=`Range ≈ ${R.toFixed(1)} m · Max height ≈ ${H.toFixed(1)} m · Flight ${tf.toFixed(2)} s`;
+    x.clearRect(0,0,c.width,c.height);
+    x.strokeStyle='rgba(110,160,255,.18)';for(let i=0;i<=10;i++){x.beginPath();x.moveTo(40+i*54,20);x.lineTo(40+i*54,340);x.stroke();x.beginPath();x.moveTo(40,340-i*32);x.lineTo(580,340-i*32);x.stroke();}
+    x.strokeStyle='#7fa8ff';x.lineWidth=2;x.beginPath();x.moveTo(40,340);x.lineTo(580,340);x.moveTo(40,340);x.lineTo(40,20);x.stroke();
+    const maxX=Math.max(R*1.15,60),maxY=Math.max(H*1.3,30);
+    const sx=v=>40+(v/maxX)*540,sy=v=>340-(v/maxY)*300;
+    x.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#38e8ff';x.lineWidth=2.5;x.beginPath();
+    for(let t=0;t<=tf;t+=tf/120){const px=vx*t,py=vy*t-.5*g*t*t;t===0?x.moveTo(sx(px),sy(py)):x.lineTo(sx(px),sy(py));}x.stroke();
+    x.fillStyle='#fff';x.beginPath();x.arc(sx(R),sy(0),4,0,7);x.fill();
+    x.fillStyle='#8ea0c8';x.font='11px monospace';x.fillText('distance →',520,358);x.save();x.translate(16,180);x.rotate(-Math.PI/2);x.fillText('height →',0,0);x.restore();
+  }
+  ['ang','spd'].forEach(i=>document.getElementById(i).oninput=draw);draw();
+}
+function labPendulum(){
+  labBody.innerHTML=`<div><canvas id="lc-pendulum" class="lab-canvas" width="620" height="380"></canvas></div>
+  <div class="ctrls"><label>LENGTH <span class="val" id="lV">2.0 m</span></label><input id="len" type="range" min="1" max="40" value="20">
+  <label>START ANGLE <span class="val" id="pV">30°</span></label><input id="pang" type="range" min="5" max="60" value="30">
+  <div class="readout">Period T = 2π√(L/g)<br><b id="pOut"></b></div></div>`;
+  const c=document.getElementById('lc-pendulum'),x=c.getContext('2d');let th=0,om=0,last=0,L=2,g=9.81;
+  function read(){L=+document.getElementById('len').value/10;th=+document.getElementById('pang').value*Math.PI/180;
+    document.getElementById('lV').textContent=L.toFixed(1)+' m';document.getElementById('pV').textContent=(+document.getElementById('pang').value)+'°';
+    document.getElementById('pOut').textContent='Period T ≈ '+(2*Math.PI*Math.sqrt(L/g)).toFixed(2)+' s';om=0;}
+  document.getElementById('len').oninput=()=>{read();draw()};document.getElementById('pang').oninput=()=>{read();draw()};read();
+  function step(ts){const dt=Math.min((ts-last)/1000||0,.033);last=ts;
+    const alpha=-g/L*Math.sin(th);om+=alpha*dt;th+=om*dt;draw();labRAF=requestAnimationFrame(step);}
+  function draw(){x.clearRect(0,0,c.width,c.height);const ox=310,oy=60,px=L*90;
+    const bx=ox+Math.sin(th)*px,by=oy+Math.cos(th)*px;
+    x.strokeStyle='rgba(150,190,255,.35)';x.lineWidth=1;x.beginPath();x.moveTo(ox-90,oy);x.lineTo(ox+90,oy);x.stroke();
+    x.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#38e8ff';x.lineWidth=3;
+    x.beginPath();x.moveTo(ox,oy);x.lineTo(bx,by);x.stroke();
+    x.fillStyle='#ffd166';x.beginPath();x.arc(bx,by,18,0,7);x.fill();
+    x.strokeStyle='rgba(110,160,255,.2)';x.setLineDash([5,6]);x.beginPath();x.moveTo(ox,oy);x.lineTo(ox,oy+px+30);x.stroke();x.setLineDash([]);
+    x.fillStyle='#8ea0c8';x.font='12px monospace';x.fillText('T = 2π√(L/g)   simple harmonic motion',180,360);
+  }
+  labRAF=requestAnimationFrame(step);
+}
+function labPyth(){
+  labBody.innerHTML=`<div><canvas id="lc-pythagoras" class="lab-canvas" width="620" height="380"></canvas></div>
+  <div class="ctrls"><label>SIDE a <span class="val" id="aV-pythagoras">3</span></label><input id="a" type="range" min="1" max="12" value="3">
+  <label>SIDE b <span class="val" id="bV">4</span></label><input id="b" type="range" min="1" max="12" value="4">
+  <div class="readout">a² + b² = c²<br><b id="cOut"></b><br><span style="color:var(--muted)">Drag the sliders to prove Pythagoras yourself.</span></div></div>`;
+  const c=document.getElementById('lc-pythagoras'),x=c.getContext('2d');
+  function draw(){const a=+document.getElementById('a').value,b=+document.getElementById('b').value,cc=Math.sqrt(a*a+b*b);
+    document.getElementById('aV').textContent=a;document.getElementById('bV').textContent=b;
+    document.getElementById('cOut').textContent=`${a}² + ${b}² = ${cc.toFixed(2)}²  →  ${a*a} + ${b*b} = ${(cc*cc).toFixed(2)}`;
+    x.clearRect(0,0,c.width,c.height);const s=Math.min(280/Math.max(a,b),42),ox=120,oy=340;
+    x.fillStyle='rgba(91,140,255,.25)';x.fillRect(ox,oy-a*s,b*s,a*s);
+    x.fillStyle='rgba(56,232,255,.25)';x.fillRect(ox+b*s,oy-a*s,a*s,a*s);
+    x.fillStyle='rgba(168,85,247,.3)';x.beginPath();x.moveTo(ox,oy);x.lineTo(ox+b*s,oy);x.lineTo(ox+b*s,oy-a*s);x.closePath();x.fill();
+    x.strokeStyle='#eaf2ff';x.lineWidth=2.5;x.beginPath();x.moveTo(ox,oy);x.lineTo(ox+b*s,oy);x.lineTo(ox+b*s,oy-a*s);x.closePath();x.stroke();
+    x.fillStyle='#eaf2ff';x.font='14px monospace';x.fillText('a',ox+b*s/2-6,oy+22);x.fillText('b',ox-18,oy-a*s/2);
+    x.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#38e8ff';
+    x.fillText('c = '+cc.toFixed(2),ox+b*s/2+14,oy-a*s/2-6);
+    x.fillStyle='#8ea0c8';x.font='12px monospace';x.fillText('The two smaller squares together equal the largest square.',60,40);
+  }
+  ['a','b'].forEach(i=>document.getElementById(i).oninput=draw);draw();
+}
+function labMol(){
+  const mols={H2O:[['O',0,0,0,'#ff5e5b',26],['H',-52,34,0,'#eaf2ff',15],['H',52,34,0,'#eaf2ff',15]],
+    CO2:[['O',-64,0,0,'#ff5e5b',24],['C',0,0,0,'#9aa4b2',26],['O',64,0,0,'#ff5e5b',24]],
+    CH4:[['C',0,0,0,'#9aa4b2',24],['H',-58,-46,0,'#eaf2ff',14],['H',58,-46,0,'#eaf2ff',14],['H',0,62,0,'#eaf2ff',14],['H',0,-10,58,'#eaf2ff',14]],
+    NaCl:[['Na',-46,0,0,'#b07cff',22],['Cl',52,0,0,'#2ee6a8',26]]};
+  labBody.innerHTML=`<div><canvas id="lc-molecule" class="lab-canvas" width="620" height="380"></canvas></div>
+  <div class="ctrls"><label>SELECT MOLECULE</label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+  ${Object.keys(mols).map(k=>`<button class="lab-tab" data-m="${k}" style="flex:1">${k}</button>`).join('')}</div>
+  <div class="readout" id="mInfo"></div></div>`;
+  const c=document.getElementById('lc-molecule'),x=c.getContext('2d');
+  const info={H2O:'Water — bent geometry, ~104.5° bond angle. The universal solvent.',
+    CO2:'Carbon dioxide — linear, non-polar, a greenhouse gas.',
+    CH4:'Methane — perfect tetrahedron, 109.5° bond angle.',
+    NaCl:'Sodium chloride — ionic lattice, held by electrostatic attraction.'};
+  function draw(m){const atoms=mols[m];x.clearRect(0,0,c.width,c.height);x.save();x.translate(310,190);
+    for(let i=0;i<atoms.length;i++)for(let j=i+1;j<atoms.length;j++){const A=atoms[i],B=atoms[j];
+      if(Math.hypot(A[1]-B[1],A[2]-B[2],A[3]-B[3])<95){x.strokeStyle='rgba(200,220,255,.5)';x.lineWidth=6;x.beginPath();x.moveTo(A[1],A[2]);x.lineTo(B[1],B[2]);x.stroke();}}
+    atoms.forEach(A=>{const g=x.createRadialGradient(A[1]-A[5]/3,A[2]-A[5]/3,2,A[1],A[2],A[5]);
+      g.addColorStop(0,'#ffffff');g.addColorStop(.35,A[4]);g.addColorStop(1,A[4]);
+      x.fillStyle=g;x.beginPath();x.arc(A[1],A[2],A[5],0,7);x.fill();
+      x.fillStyle='#03040c';x.font='bold 12px monospace';x.textAlign='center';x.fillText(A[0],A[1],A[2]+4);x.textAlign='left';});
+    x.restore();x.fillStyle='#8ea0c8';x.font='12px monospace';x.fillText(info[m],40,40);
+    document.getElementById('mInfo').textContent=info[m];
+    document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('active',b.dataset.m===m));}
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>draw(b.dataset.m));
+  draw('H2O');
+}
+openLab('proj');
+
+/* ================= LANGUAGES ================= */
+const LANGS=[
+ {n:'English',s:'EN',t:'Education is the most powerful weapon which you can use to change the world.',note:'Essays, letters, poetry, literary analysis.'},
+ {n:'हिन्दी Hindi',s:'HI',t:'शिक्षा सबसे शक्तिशाली हथियार है जिससे आप दुनिया बदल सकते हैं।',note:'निबंध, पत्र, कहानी, कविता।'},
+ {n:'বাংলা Bengali',s:'BN',t:'শিক্ষা হলো সবচেয়ে শক্তিশালী অস্ত্র যা দিয়ে আপনি পৃথিবী বদলাতে পারেন।',note:'প্রবন্ধ, চিঠি, গল্প, কবিতা।'},
+ {n:'Español',s:'ES',t:'La educación es el arma más poderosa que puedes usar para cambiar el mundo.',note:'Ensayos, cartas, narrativa, poesía.'},
+ {n:'Français',s:'FR',t:"L'éducation est l'arme la plus puissante pour changer le monde.",note:'Dissertations, lettres, poésie.'},
+ {n:'Deutsch',s:'DE',t:'Bildung ist die mächtigste Waffe, um die Welt zu verändern.',note:'Aufsätze, Briefe, Gedichte.'},
+ {n:'العربية Arabic',s:'AR',t:'التعليم هو أقوى سلاح يمكنك استخدامه لتغيير العالم.',note:'مقالات، رسائل، شعر.'},
+ {n:'中文 Mandarin',s:'ZH',t:'教育是你用来改变世界最强大的武器。',note:'作文、书信、诗歌、文学分析。'},
+ {n:'日本語 Japanese',s:'JA',t:'教育は世界を変えるために使える最も強力な武器です。',note:'作文、手紙、詩、文学分析。'},
+ {n:'Русский Russian',s:'RU',t:'Образование — самое мощное оружие, которым можно изменить мир.',note:'Сочинения, письма, поэзия.'},
+ {n:'Português',s:'PT',t:'A educação é a arma mais poderosa que você pode usar para mudar o mundo.',note:'Redações, cartas, poesia.'},
+ {n:'தமிழ் Tamil',s:'TA',t:'கல்வியே உலகை மாற்ற நீங்கள் பயன்படுத்தக்கூடிய மிக சக்திவாய்ந்த ஆயுதம்.',note:'கட்டுரைகள், கடிதங்கள், கவிதை.'}
+];
+const langGrid=document.getElementById('langGrid');
+LANGS.forEach((l,i)=>{const d=document.createElement('div');d.className='lang'+(i===0?' active':'');d.innerHTML=`<div class="n">${l.n}</div><div class="s">${l.s}</div>`;
+  d.onclick=()=>{document.querySelectorAll('.lang').forEach(x=>x.classList.remove('active'));d.classList.add('active');
+    document.getElementById('langSample').innerHTML=`<div class="txt">${l.t}</div><div class="meta">${l.n.toUpperCase()} · ${l.note} · Informatica writes essays and compositions here with correct grammar.</div>`;};
+  langGrid.appendChild(d);});
+document.getElementById('langSample').innerHTML=`<div class="txt">${LANGS[0].t}</div><div class="meta">ENGLISH · ${LANGS[0].note} · Informatica writes essays and compositions here with correct grammar.</div>`;
+
+/* ================= LITERATURE ================= */
+const LIT=[
+ {r:'ENGLAND',t:'Hamlet',a:'William Shakespeare',d:'Revenge, mortality and the burden of thought — the most performed play in history.'},
+ {r:'GREECE',t:'The Odyssey',a:'Homer',d:'A hero\'s ten-year voyage home; the archetype of the epic journey.'},
+ {r:'RUSSIA',t:'War and Peace',a:'Leo Tolstoy',d:'Napoleonic Europe through five families — history as lived experience.'},
+ {r:'INDIA',t:'Gitanjali',a:'Rabindranath Tagore',d:'Song-offerings that won the first Nobel Prize in Literature for Asia (1913).'},
+ {r:'NIGERIA',t:'Things Fall Apart',a:'Chinua Achebe',d:'The collision of Igbo tradition and colonial Christianity in Okonkwo\'s world.'},
+ {r:'COLOMBIA',t:'One Hundred Years of Solitude',a:'Gabriel García Márquez',d:'Magical realism and the cyclic history of the Buendía family.'},
+ {r:'PERSIA',t:'Masnavi',a:'Rumi',d:'Mystical poetry of love and union with the divine.'},
+ {r:'JAPAN',t:'The Tale of Genji',a:'Murasaki Shikibu',d:'Often called the world\'s first novel, written in 11th-century Japan.'},
+ {r:'GERMANY',t:'Faust',a:'Johann Wolfgang von Goethe',d:'A scholar\'s bargain with the devil — the tragedy of striving.'},
+ {r:'RUSSIA',t:'Crime and Punishment',a:'Fyodor Dostoevsky',d:'Guilt, redemption and the psychology of a murderer.'},
+ {r:'INDIA',t:'Abhijnanashakuntala',a:'Kalidasa',d:'A classical Sanskrit romance of memory, loss and reunion.'},
+ {r:'SPAIN',t:'Don Quixote',a:'Miguel de Cervantes',d:'The first modern novel — idealism against a stubbornly real world.'},
+ {r:'ENGLAND',t:'1984',a:'George Orwell',d:'Surveillance, language and power in a totalitarian future.'},
+ {r:'ENGLAND',t:'Pride and Prejudice',a:'Jane Austen',d:'Manners, marriage and moral judgement in Georgian England.'},
+ {r:'INDIA',t:'Mahabharata',a:'Vyasa',d:'The great epic of duty, war and the Bhagavad Gita at its heart.'},
+ {r:'CHINA',t:'Dream of the Red Chamber',a:'Cao Xueqin',d:'One of China\'s Four Great Classical Novels — family, love and decline.'},
+ {r:'FRANCE',t:'Les Misérables',a:'Victor Hugo',d:'Justice, mercy and revolution in nineteenth-century France.'},
+ {r:'USA',t:'Beloved',a:'Toni Morrison',d:'Slavery\'s haunting legacy, memory and the cost of freedom.'},
+ {r:'NORWAY',t:'A Doll\'s House',a:'Henrik Ibsen',d:'A woman\'s awakening against the conventions of marriage.'},
+ {r:'EGYPT',t:'The Book of the Dead',a:'Ancient Egyptian tradition',d:'Spells for the soul\'s journey — the earliest literature of the afterlife.'}
+];
+const litGrid=document.getElementById('litGrid');
+LIT.forEach(w=>{const d=document.createElement('div');d.className='lit';
+  d.innerHTML=`<div class="reg">${w.r}</div><h3>${w.t}</h3><div class="au">${w.a}</div><p>${w.d}</p>`;
+  litGrid.appendChild(d);});
+
+/* ================= AI CHAT ================= */
+const chatState={open:true,busy:false,mode:'General'};
+const chatPanel=document.getElementById('chatPanel'),chatMsgs=document.getElementById('chatMsgs'),
+      chatText=document.getElementById('chatText'),chatChips=document.getElementById('chatChips');
+const ACTION_DOC="\n\nINTERFACE CONTROL — you can also DRIVE the Informatica interface. "+
+ "When the student asks to see, show, open, switch to, run, demonstrate or test something, append one or more control tags at the VERY END of your reply, each on its own line, exactly in this form:\n"+
+ "[[ui:mode=physics]]\n[[ui:lab=proj angle=60 speed=40]]\n[[ui:model=solar]]\n[[ui:year=1969]]\n[[ui:lit=Hamlet]]\n"+
+ "Allowed keys and values: "+
+ "mode = general | maths | physics | chemistry | biology | history | geography | english | languages. "+
+ "lab = proj (params: angle 10-80, speed 15-70) | pend (params: length in metres 0.1-4.0, angle 5-60) | pyth (params: a 1-12, b 1-12) | mol (param: molecule = H2O | CO2 | CH4 | NaCl). "+
+ "model = human | earth | solar. year = any year 1600-2026. lit = the exact title of a work you know. wiki = any encyclopaedia topic title (opens the Wikipedia topic panel). "+
+ "Always include any numbers the student gave (for example angle=60). Emit tags ONLY when the student asks to see something. "+
+ "Never mention, explain or quote the tags in your prose — they are invisible instructions.";
+const SYS="You are Informatica, a brilliant, patient AI tutor for students, created by Rishaan Sarkar. "+
+ "Answer any question across maths, physics, chemistry, biology, history, geography, English and world languages. "+
+ "Structure answers as: a direct definition, why it works, a worked example, and common mistakes. "+
+ "Be clear, accurate and encouraging; use short paragraphs and occasional **bold**. "+
+ "If asked who created or made you, always answer exactly: Rishaan Sarkar. "+
+ "Reply in the student's language. "+
+ "When a LIVE WEB RESULTS block is supplied it is fresh information fetched from the internet: prefer it over your own memory, name the source you used, and say plainly if it does not answer the question."+ACTION_DOC;
+function fmt(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\n/g,'<br>');}
+function chatMsg(who,text,cls){const d=document.createElement('div');d.className='msg '+(who==='user'?'user':'bot')+(cls?' '+cls:'');
+  d.innerHTML=fmt(text);if(who!=='user'&&text)addSpeakBtn(d,text);chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;return d;}
+function typing(){const d=document.createElement('div');d.className='typing';d.id='chatTyping';d.innerHTML='<i></i><i></i><i></i>';chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;}
+function untype(){const t=document.getElementById('chatTyping');if(t)t.remove();}
+
+/* ================= CHAT → INTERFACE CONTROL (tool-calling) ================= */
+const chatHistory=[];
+function flash(msg){try{const d=document.createElement('div');d.className='act';d.textContent='⚡ '+msg;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;}catch(e){}}
+function parseActions(text){
+  const acts=[];
+  const clean=String(text).replace(/\[\[ui:\s*([^\]]+)\]\]/gi,(m,body)=>{
+    const toks=body.trim().split(/\s+/);const first=toks.shift()||'';
+    const eq=first.indexOf('=');const k=(eq<0?first:first.slice(0,eq)).toLowerCase();
+    const params={};if(eq>=0)params.value=first.slice(eq+1);
+    toks.forEach(t=>{const i=t.indexOf('=');if(i>0)params[t.slice(0,i).toLowerCase()]=t.slice(i+1);});
+    if(k)acts.push({k:k,params:params});return '';
+  }).replace(/\n{3,}/g,'\n\n').replace(/[ \t]+$/gm,'').trim();
+  return {clean:clean,acts:acts};
+}
+const LAB_PARAMS={proj:{angle:'ang',speed:'spd',speed_ms:'spd'},pend:{angle:'pang',length:'len',len:'len'},pyth:{a:'a',b:'b',side_a:'a',side_b:'b'},mol:{molecule:'mol',mol:'mol'}};
+function setLabParams(id,params){
+  const map=LAB_PARAMS[id]||{};let n=0;
+  for(const k in params){
+    if(k==='value')continue;
+    const key=k.toLowerCase();
+    if(id==='mol'&&(key==='molecule'||key==='mol')){const b=document.querySelector('[data-m="'+params[k]+'"]');if(b){b.click();n++;}continue;}
+    const elId=map[key];if(!elId)continue;
+    const el=document.getElementById(elId);if(!el||!el.min)continue;
+    let v=parseFloat(params[k]);if(isNaN(v))continue;
+    if(id==='pend'&&(key==='length'||key==='len'))v=Math.round(v*10);
+    v=Math.max(parseFloat(el.min),Math.min(parseFloat(el.max),v));
+    el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));
+    el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse');n++;
+  }
+  return n;
+}
+function actionLabel(a){
+  const v=a.params.value||'';
+  if(a.k==='mode')return 'Mode → '+v;
+  if(a.k==='model')return '3D model → '+v;
+  if(a.k==='lab'){const extra=Object.keys(a.params).filter(x=>x!=='value').map(x=>x+'='+a.params[x]).join(' ');return 'Experiment → '+v+(extra?' ('+extra+')':'');}
+  if(a.k==='year')return 'Timeline → '+v;
+  if(a.k==='lit')return 'Literature → '+v;
+  if(a.k==='wiki')return 'Wikipedia → '+v;
+  return a.k+' → '+v;
+}
+function execAction(a){
+  const k=a.k,v=a.params.value||'';let ok=false;
+  try{
+    if(k==='mode'&&MODES.some(m=>m.id===v)){setMode(v);ok=true;}
+    else if(k==='model'&&EX.some(e=>e.id===v)){activeEx=v;const i=EX.findIndex(e=>e.id===v);
+      document.querySelectorAll('.ex-tab').forEach((b,j)=>b.classList.toggle('active',j===i));showEx();ok=true;}
+    else if(k==='lab'){const i=LABS.findIndex(l=>l.id===v);
+      if(i>=0){document.querySelectorAll('.lab-tab').forEach((b,j)=>b.classList.toggle('active',j===i));openLab(v);
+        setLabParams(v,a.params);ok=true;}}
+    else if(k==='year'){openYear(v);ok=true;}
+    else if(k==='lit'){openLit(v);ok=true;}
+    else if(k==='wiki'&&v){openWiki(v);ok=true;}
+  }catch(e){console.warn('action failed',e);}
+  return ok;
+}
+function applyActions(list){
+  let shown=0;
+  (list||[]).forEach(a=>{if(execAction(a)){if(shown<4){flash(actionLabel(a));shown++;}}});
+}
+function localIntent(q){
+  const s=' '+String(q).toLowerCase()+' ',acts=[];
+  const push=(k,p)=>acts.push({k:k,params:p||{}});
+  const num=(re)=>{const m=s.match(re);return m?m[1]:null;};
+  const angle=num(/(\d+(?:\.\d+)?)\s*(?:°|deg\b|degrees?\b)/);
+  const speed=num(/(\d+(?:\.\d+)?)\s*(?:m\/s|mps\b|metres per second|meters per second)/);
+  const mm=s.match(/\b(?:switch|change|go|set|put|move)\s+(?:me\s+)?(?:to\s+|into\s+)?([a-z]+)\s*mode/);
+  if(mm){const w=mm[1];const found=MODES.find(m=>m.id===w||m.name.toLowerCase()===w);if(found)push('mode',{value:found.id});}
+  if(/projectile|trajectory|launch angle/.test(s)){
+    const p={};if(angle)p.angle=angle;if(speed)p.speed=speed;
+    push('mode',{value:'physics'});push('lab',Object.assign({value:'proj'},p));
+  }else if(/pendulum|oscillat|swinging bob/.test(s)){
+    const p={};const L=num(/(\d+(?:\.\d+)?)\s*(?:m\b|metres?\b|meters?\b)/);if(L)p.length=L;if(angle)p.angle=angle;
+    push('mode',{value:'physics'});push('lab',Object.assign({value:'pend'},p));
+  }else if(/pythagor|right[- ]angled triangle|hypotenuse/.test(s)){
+    const p={};const a=num(/\bside\s*a\s*=?\s*(\d+(?:\.\d+)?)/);const b=num(/\bside\s*b\s*=?\s*(\d+(?:\.\d+)?)/);
+    if(a)p.a=a;if(b)p.b=b;push('mode',{value:'maths'});push('lab',Object.assign({value:'pyth'},p));
+  }else if(/molecule|water\b|h2o\b|methane|ch4\b|carbon dioxide|co2\b|nacl|sodium chloride|bond angle/.test(s)){
+    const p={};
+    if(/water|h2o/.test(s))p.molecule='H2O';
+    else if(/methane|ch4/.test(s))p.molecule='CH4';
+    else if(/carbon dioxide|co2/.test(s))p.molecule='CO2';
+    else if(/nacl|sodium chloride|table salt/.test(s))p.molecule='NaCl';
+    push('mode',{value:'chemistry'});push('lab',Object.assign({value:'mol'},p));
+  }
+  const wm=String(q).match(/\bwikipedia\b/i);
+  if(wm){let sub=String(q).replace(/^.*?\bwikipedia\b/i,'').replace(/^\s*(for|about|on|:|-)?\s*/i,'').replace(/[?.!]+$/,'').trim();
+    if(!sub)sub=String(q).replace(/\b(wikipedia|search|look up|find|for|about|on)\b/gi,' ').replace(/\s+/g,' ').trim();
+    if(sub)push('wiki',{value:sub});}
+  if(/solar system|the planets?\b|sun and its|outer planets/.test(s))push('model',{value:'solar'});
+  else if(/\bearth\b|the globe|world map|our planet/.test(s))push('model',{value:'earth'});
+  else if(/human body|anatomy|skeleton|the heart\b|human organs/.test(s))push('model',{value:'human'});
+  const y=s.match(/\b(1[6-9]\d\d|20[0-2]\d)\b/);
+  if(y&&/histor|happened|event|revolution|\bwar\b|in \d{4}|the year/.test(s))push('year',{value:y[1]});
+  return acts;
+}
+
+/* ================= LIVE INTERNET (real web access) ================= */
+const WEBSTATE={mode:'auto'};
+try{const w=localStorage.getItem('informatica_web');if(w==='auto'||w==='on'||w==='off')WEBSTATE.mode=w;}catch(e){}
+function webMode(){return WEBSTATE.mode;}
+function setWebMode(m){WEBSTATE.mode=m;try{localStorage.setItem('informatica_web',m);}catch(e){}updateWebBtn();}
+function updateWebBtn(){const b=document.getElementById('chatWeb');if(!b)return;
+  const m=webMode();b.classList.toggle('on',m!=='off');b.style.opacity=m==='off'?'.4':'1';
+  b.title='Internet: '+(m==='off'?'OFF — click to turn on':m==='on'?'ALWAYS ON — click for auto':'AUTO — click to turn off');}
+function cycleWeb(){const o=['auto','on','off'];const n=o[(o.indexOf(webMode())+1)%3];setWebMode(n);
+  toast('Internet access: '+n.toUpperCase()+(n==='auto'?' — searches when the question needs live facts':n==='on'?' — every answer is grounded in a live search':''));}
+const WEB_RE=/\b(latest|newest|current|currently|today|tonight|right now|this (week|month|year)|news|breaking|recent|recently|update|updates|live|score|scores|result|results|who won|winner|price|prices|cost|stock|share price|exchange rate|weather|forecast|temperature|rain|snow|release date|released|launched|2025|2026|search (the )?(web|internet|online)|look (it )?up|google)\b/i;
+function needsWeb(q){if(webMode()==='off')return false;if(webMode()==='on')return true;return WEB_RE.test(q);}
+function sysLine(text){const d=document.createElement('div');d.className='sysline';d.textContent=text;chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;return d;}
+async function jget(url,ms){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms||10000);
+  try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();}finally{clearTimeout(t);}}
+async function jtext(url,ms){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms||15000);
+  try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw new Error('HTTP '+r.status);return await r.text();}finally{clearTimeout(t);}}
+function stripTags(s){return String(s||'').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\s+/g,' ').trim();}
+function keywords(q){
+  const stop=/\b(what|whats|what's|is|are|was|were|the|a|an|of|about|on|in|for|to|me|my|tell|show|give|find|latest|newest|recent|recently|news|update|updates|today|tonight|current|currently|please|how|much|many|does|do|did|when|where|who|whose|why|which|and|or|it|its|there|here|any|some|good|best|new)\b/gi;
+  return String(q||'').replace(/[?!.,;:"“”'’()]/g,' ').replace(stop,' ').replace(/\s+/g,' ').trim();}
+async function wikiSearch(q,limit){const r=await jget('https://en.wikipedia.org/w/rest.php/v1/search/page?q='+encodeURIComponent(q)+'&limit='+(limit||3));
+  return (r.pages||[]).map(p=>({title:p.title,desc:p.description||'',excerpt:String(p.excerpt||'').replace(/<[^>]+>/g,''),key:p.key||p.title}));}
+async function wikiSummary(title){const r=await jget('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title));
+  return {title:r.title,extract:r.extract||'',url:(r.content_urls&&r.content_urls.desktop&&r.content_urls.desktop.page)||('https://en.wikipedia.org/wiki/'+encodeURIComponent(title))};}
+async function ddg(q){const r=await jget('https://api.duckduckgo.com/?q='+encodeURIComponent(q)+'&format=json&no_html=1&skip_disambig=1');
+  const out=[];if(r.AbstractText)out.push({title:r.Heading||q,text:r.AbstractText,url:r.AbstractURL||''});
+  (r.RelatedTopics||[]).slice(0,3).forEach(t=>{if(t&&t.Text)out.push({title:String(t.Text).split(' - ')[0].slice(0,60),text:t.Text,url:t.FirstURL||''});});
+  return out;}
+async function webNews(q){
+  const since=Math.floor(Date.now()/1000)-2592000;
+  const run=(query,recent)=>jget('https://hn.algolia.com/api/v1/search_by_date?query='+encodeURIComponent(query)+'&tags=story&hitsPerPage=6'+(recent?'&numericFilters=created_at_i%3E'+since:''));
+  let r=await run(q,true);
+  if(!((r.hits||[]).length)){const short=String(q).split(/\s+/).slice(0,2).join(' ');if(short&&short!==q)r=await run(short,true);}
+  if(!((r.hits||[]).length))r=await run(q,false);
+  return (r.hits||[]).filter(h=>h&&h.title).map(h=>({title:h.title,url:h.url||('https://news.ycombinator.com/item?id='+h.objectID),date:String(h.created_at||'').slice(0,10),src:'Hacker News'}));}
+async function webWeather(q){
+  const m=String(q).match(/\b(?:in|at|for)\s+([A-Za-z\u00C0-\u024F'’.-]+(?:\s+[A-Za-z\u00C0-\u024F'’.-]+){0,3})/i);
+  if(!m)return null;
+  const place=m[1].replace(/\s+(today|tonight|tomorrow|now|currently|please|right now|this week|this weekend)\b[\s\S]*$/i,'').trim();
+  if(place.length<2)return null;
+  const g=await jget('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(place)+'&count=1');
+  const c=g.results&&g.results[0];if(!c)return null;
+  const f=await jget('https://api.open-meteo.com/v1/forecast?latitude='+c.latitude+'&longitude='+c.longitude+'&current=temperature_2m,relative_humidity_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto');
+  return {place:c.name+', '+(c.country||''),cur:f.current||{},day:{max:(f.daily&&f.daily.temperature_2m_max&&f.daily.temperature_2m_max[0]),min:(f.daily&&f.daily.temperature_2m_min&&f.daily.temperature_2m_min[0])}};}
+const COINS={bitcoin:'bitcoin',btc:'bitcoin',ethereum:'ethereum',eth:'ethereum',solana:'solana',sol:'solana',dogecoin:'dogecoin',doge:'dogecoin',cardano:'cardano',ada:'cardano',ripple:'ripple',xrp:'ripple',bnb:'binancecoin',litecoin:'litecoin',polkadot:'polkadot',tron:'tron',chainlink:'chainlink'};
+async function webCrypto(q){
+  const s=' '+String(q).toLowerCase()+' ',ids=[];
+  for(const k in COINS){if(new RegExp('\\b'+k+'\\b').test(s)&&ids.indexOf(COINS[k])<0)ids.push(COINS[k]);}
+  if(!ids.length)return null;
+  const r=await jget('https://api.coingecko.com/api/v3/simple/price?ids='+ids.join(',')+'&vs_currencies=usd&include_24hr_change=true');
+  const out=[];ids.forEach(id=>{if(r[id]&&typeof r[id].usd==='number')out.push({id:id,usd:r[id].usd,chg:r[id].usd_24h_change});});
+  return out.length?out:null;}
+async function webPapers(q){
+  const r=await jget('https://api.crossref.org/works?query='+encodeURIComponent(q)+'&rows=3&select=title,container-title,issued,URL');
+  return (((r.message&&r.message.items)||[]).map(it=>({title:(it.title&&it.title[0])||'',where:(it['container-title']&&it['container-title'][0])||'',year:(it.issued&&it.issued['date-parts']&&it.issued['date-parts'][0]&&it.issued['date-parts'][0][0])||'',url:it.URL||''}))).filter(p=>p.title);}
+function findUrl(q){const m=String(q).match(/https?:\/\/[^\s"'<>)]+/i);return m?m[0]:null;}
+async function webRead(url){const t=await jtext('https://r.jina.ai/'+url,28000);return stripTags(t).slice(0,7000);}
+async function webGather(q){
+  const url=findUrl(q);
+  const qs=String(q).replace(/^(search( the)? (web|internet)( for)?|look up|google|find|read|summari[sz]e|explain)\s*:?\s*/i,'').replace(/https?:\/\/[^\s]+/g,'').trim()||q;
+  const isNews=/\b(news|latest|recent|today|this (week|month)|breaking|update|headlines?)\b/i.test(q);
+  const isWeather=/\b(weather|forecast|temperature|rain|snow)\b/i.test(q);
+  const isPrice=/\b(price|prices|how much|worth|market cap|exchange rate)\b/i.test(q);
+  const isPaper=/\b(paper|papers|study|studies|research|journal|peer[- ]reviewed)\b/i.test(q);
+  const [pages,ddgRes,news,weather,crypto,papers,page]=await Promise.all([
+    url?Promise.resolve([]):wikiSearch(qs,3).catch(()=>[]),
+    url?Promise.resolve([]):ddg(qs).catch(()=>[]),
+    isNews?webNews(keywords(qs)||qs).catch(()=>[]):Promise.resolve([]),
+    isWeather?webWeather(q).catch(()=>null):Promise.resolve(null),
+    isPrice?webCrypto(q).catch(()=>null):Promise.resolve(null),
+    isPaper?webPapers(qs).catch(()=>[]):Promise.resolve([]),
+    url?webRead(url).catch(()=>null):Promise.resolve(null)]);
+  const sums=[];
+  if(!url){for(const p of pages.slice(0,2)){try{const s=await wikiSummary(p.key||p.title);if(s&&s.extract)sums.push(s);}catch(e){}}}
+  return {url:url,pages:pages,sums:sums,ddg:ddgRes,news:news,weather:weather,crypto:crypto,papers:papers,page:page};}
+function webCount(r){return (r.sums?r.sums.length:0)+(r.ddg?r.ddg.length:0)+(r.news?r.news.length:0)+(r.weather?1:0)+(r.crypto?r.crypto.length:0)+(r.papers?r.papers.length:0)+(r.page?1:0);}
+function webBlock(r){
+  const L=['LIVE WEB RESULTS — fetched from the internet just now ('+new Date().toUTCString()+'). Treat these as your primary, up-to-date source of truth and name the source you used:'];
+  if(r.url&&r.page)L.push('- Full text of '+r.url+':\n'+r.page);
+  if(r.weather&&r.weather.cur){const w=r.weather;L.push('- Weather ('+w.place+') — source Open-Meteo: now '+w.cur.temperature_2m+'°C, humidity '+w.cur.relative_humidity_2m+'%, wind '+w.cur.wind_speed_10m+' km/h; today min '+w.day.min+'°C / max '+w.day.max+'°C.');}
+  if(r.crypto)L.push('- Live prices — source CoinGecko: '+r.crypto.map(c=>c.id+' $'+c.usd+(typeof c.chg==='number'?' ('+c.chg.toFixed(2)+'% 24h)':'')).join(', ')+'.');
+  (r.sums||[]).forEach(s=>L.push('- Wikipedia, "'+s.title+'": '+s.extract));
+  (r.pages||[]).forEach(p=>{if(p.excerpt&&!((r.sums||[]).some(s=>s.title===p.title)))L.push('- Wikipedia, "'+p.title+'": '+p.excerpt);});
+  (r.ddg||[]).forEach(d=>L.push('- DuckDuckGo: '+d.text));
+  if(r.papers&&r.papers.length){L.push('- Scholarly papers — source Crossref:');r.papers.forEach(p=>L.push('  · '+p.title+(p.where?' — '+p.where:'')+(p.year?' ('+p.year+')':'')));}
+  if(r.news&&r.news.length){L.push('- Recent headlines, last 30 days — source Hacker News:');r.news.forEach(n=>L.push('  · '+(n.title||'')+(n.date?' ('+n.date+')':'')));}
+  L.push('If these results do not actually answer the question, say so plainly, then answer from your own knowledge. Never invent facts that are not in the results when the question is about current events.');
+  return L.join('\n');}
+function webSources(r){const s=[];
+  if(r.url)s.push({t:'r.jina.ai reader',u:'https://r.jina.ai/'+r.url});
+  (r.sums||[]).forEach(x=>s.push({t:x.title,u:x.url}));
+  (r.ddg||[]).forEach(d=>{if(d.url)s.push({t:d.title||'DuckDuckGo',u:d.url});});
+  (r.papers||[]).forEach(p=>{if(p.url)s.push({t:p.title,u:p.url});});
+  (r.news||[]).forEach(n=>s.push({t:n.title,u:n.url}));
+  if(r.weather)s.push({t:r.weather.place+' weather',u:'https://open-meteo.com/'});
+  if(r.crypto)s.push({t:'CoinGecko prices',u:'https://www.coingecko.com/'});
+  return s.slice(0,6);}
+function showSources(srcs){if(!srcs.length)return;
+  const d=document.createElement('div');d.className='wsrc';
+  d.innerHTML='<span class="wlab">🌐 internet</span>'+srcs.map(s=>'<a href="'+String(s.u).replace(/"/g,'%22')+'" target="_blank" rel="noopener noreferrer">'+String(s.t).replace(/[<>&"]/g,'').slice(0,46)+'</a>').join('');
+  chatMsgs.appendChild(d);chatMsgs.scrollTop=chatMsgs.scrollHeight;}
+const chatWebBtn=document.getElementById('chatWeb');
+if(chatWebBtn)chatWebBtn.onclick=cycleWeb;
+updateWebBtn();
+
+/* Built-in suggestion thumbnails are embedded directly in the chip markup.
+   They load independently of Wikipedia search, so they are visible immediately. */
+/* ================= WIKIPEDIA EXPLORE (search + topic panel) ================= */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fmtNum(n){const a=Math.abs(n);if(a>=1e6||(a>0&&a<0.001))return n.toExponential(2).replace('e+','e');return (Math.round(n*100)/100).toLocaleString();}
+const WD_LABELS={P31:'Instance of',P279:'Subclass of',P17:'Country',P27:'Citizenship',P106:'Occupation',P569:'Born',P570:'Died',P19:'Birthplace',P20:'Place of death',P1082:'Population',P2046:'Area (km²)',P571:'Founded',P577:'Published',P50:'Author',P136:'Genre',P159:'Headquarters',P112:'Founded by',P36:'Capital',P38:'Currency',P30:'Continent',P361:'Part of',P166:'Award received',P21:'Gender',P170:'Creator',P86:'Composer',P57:'Director',P575:'Discovered',P155:'Preceded by',P156:'Followed by',P2067:'Mass',P61:'Discoverer',P737:'Influenced by'};
+async function wikiSearchPages(q,limit){
+  const r=await jget('https://en.wikipedia.org/w/rest.php/v1/search/page?q='+encodeURIComponent(q)+'&limit='+(limit||8));
+  return (r.pages||[]).map(p=>({title:p.title,key:p.key||p.title,desc:p.description||'',excerpt:stripTags(p.excerpt||''),thumb:(p.thumbnail&&p.thumbnail.url)||''}));}
+
+async function wikiFacts(qid){
+  if(!qid)return [];
+  const d=await jget('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+qid+'&props=claims&format=json&origin=*');
+  const cl=(d.entities&&d.entities[qid]&&d.entities[qid].claims)||{};
+  const facts=[],refs=[];
+  for(const p in WD_LABELS){
+    if(facts.length>=10)break;
+    const c=cl[p]&&cl[p][0];if(!c||!c.mainsnak)continue;
+    const dv=c.mainsnak.datavalue;if(!dv)continue;
+    let v='',isRef=false;
+    if(dv.type==='wikibase-entityid'&&dv.value){v='Q'+dv.value['numeric-id'];isRef=true;}
+    else if(dv.type==='time'&&dv.value){let t=String(dv.value.time||'');const neg=t.charAt(0)==='-';t=t.replace(/^[+-]/,'');v=t.slice(0,4)+(neg?' BC':'');}
+    else if(dv.type==='quantity'&&dv.value){const n=Number(dv.value.amount);if(!isFinite(n))continue;v=fmtNum(n);}
+    else if((dv.type==='string'||dv.type==='monolingualtext')&&dv.value){v=dv.value.text||dv.value;}
+    else continue;
+    if(v===''||v==null)continue;
+    facts.push({label:WD_LABELS[p],value:String(v),raw:String(v),isRef:isRef});
+  }
+  const uniq=[...new Set(facts.filter(f=>f.isRef).map(f=>f.raw))].slice(0,12);
+  if(uniq.length){
+    try{const ld=await jget('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+uniq.join('|')+'&props=labels&languages=en&format=json&origin=*');
+      const map={};uniq.forEach(q=>{const e=ld.entities&&ld.entities[q];map[q]=(e&&e.labels&&e.labels.en&&e.labels.en.value)||q;});
+      facts.forEach(f=>{if(f.isRef)f.value=map[f.raw]||f.raw;});
+    }catch(e){}
+  }
+  return facts.map(f=>({label:f.label,value:f.value}));}
+async function wikiTopic(key){
+  const s=await jget('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(key));
+  const out={title:s.title||key,desc:s.description||'',extract:s.extract||'',
+    thumb:(s.thumbnail&&s.thumbnail.url)||'',hero:(s.originalimage&&s.originalimage.source)||(s.thumbnail&&s.thumbnail.url)||'',
+    url:(s.content_urls&&s.content_urls.desktop&&s.content_urls.desktop.page)||('https://en.wikipedia.org/wiki/'+encodeURIComponent(key)),
+    qid:s.wikibase_item||'',coords:s.coordinates||null,images:[],related:[],facts:[]};
+  const [media,links,facts]=await Promise.all([
+    jget('https://en.wikipedia.org/api/rest_v1/page/media-list/'+encodeURIComponent(key)).catch(()=>null),
+    jget('https://en.wikipedia.org/w/api.php?action=query&generator=links&titles='+encodeURIComponent(key)+'&gpllimit=24&gplnamespace=0&prop=pageimages&piprop=thumbnail&pithumbsize=180&format=json&origin=*').catch(()=>null),
+    out.qid?wikiFacts(out.qid).catch(()=>[]):Promise.resolve([])]);
+  out.facts=facts||[];
+  if(media&&media.items){
+    const seen={};
+    media.items.forEach(it=>{
+      if(it.type!=='image'||!it.srcset||!it.srcset.length)return;
+      let src=(it.srcset[it.srcset.length-1]||{}).src||'';if(!src)return;
+      if(src.indexOf('//')===0)src='https:'+src;
+      if(!/\.(jpe?g|png|gif|webp)$/i.test(src))return;
+      const k=String(src.split('/').pop()).replace(/^\d+px-/,'');
+      if(seen[k])return;seen[k]=1;out.images.push(src);
+    });
+    out.images=out.images.slice(0,9);
+  }
+  if(links&&links.query&&links.query.pages){
+    out.related=Object.keys(links.query.pages).map(k=>links.query.pages[k])
+      .filter(p=>p&&p.title&&p.missing===undefined)
+      .map(p=>({title:p.title,thumb:(p.thumbnail&&p.thumbnail.source)||''}))
+      .sort((a,b)=>a.title.localeCompare(b.title)).slice(0,12);
+  }
+  return out;}
+function wikiPanelHTML(t){
+  const hero=t.hero||t.thumb;const h=[];
+  h.push('<button class="modal-close" id="wClose" aria-label="Close">✕</button>');
+  h.push('<div class="whero">'+(hero?'<img src="'+esc(hero)+'" alt="'+esc(t.title)+'" onerror="this.style.display=\'none\'">':'')+'<div class="wt"><h3>'+esc(t.title)+'</h3>'+(t.desc?'<div class="wd">'+esc(t.desc)+'</div>':'')+'</div></div>');
+  h.push('<div class="wbody">');
+  if(t.extract)h.push('<p class="wex">'+esc(t.extract)+'</p>');
+  if(t.facts&&t.facts.length){h.push('<div class="wsub">KEY FACTS</div><div class="wfacts">');
+    t.facts.forEach(f=>h.push('<div class="wfact"><div class="fl">'+esc(f.label)+'</div><div class="fv">'+esc(f.value)+'</div></div>'));h.push('</div>');}
+  if(t.images&&t.images.length){h.push('<div class="wsub">IMAGES</div><div class="wgal">');
+    t.images.forEach(src=>h.push('<img src="'+esc(src)+'" alt="" loading="lazy" data-full="'+esc(src)+'">'));h.push('</div>');}
+  if(t.related&&t.related.length){h.push('<div class="wsub">RELATED TOPICS</div><div class="wrel">');
+    t.related.forEach(r=>h.push('<button data-t="'+esc(r.title)+'">'+esc(r.title)+'</button>'));h.push('</div>');}
+  h.push('<div class="wacts"><a class="prim" href="'+esc(t.url)+'" target="_blank" rel="noopener noreferrer">READ ON WIKIPEDIA →</a><button id="wAsk">✦ ASK INFORMATICA ABOUT THIS</button></div>');
+  h.push('</div>');
+  return h.join('');}
+function closeWiki(){const p=document.getElementById('wikiPanel');if(p)p.classList.remove('open');}
+async function openWiki(title){
+  const panel=document.getElementById('wikiPanel'),card=document.getElementById('wikiCard');
+  if(!panel||!card)return;
+  panel.classList.add('open');panel.scrollTop=0;
+  card.innerHTML='<div class="wloading">🔎 Reading Wikipedia…</div>';
+  try{
+    let t=null;
+    try{t=await wikiTopic(title);}catch(e){
+      const hits=await wikiSearchPages(title,1);
+      if(!hits.length)throw e;
+      t=await wikiTopic(hits[0].key||hits[0].title);
+    }
+    card.innerHTML=wikiPanelHTML(t);
+    card.querySelectorAll('.wgal img').forEach(im=>im.onclick=()=>window.open(im.dataset.full||im.src,'_blank','noopener'));
+    card.querySelectorAll('.wrel button').forEach(b=>b.onclick=()=>openWiki(b.dataset.t));
+    const ask=card.querySelector('#wAsk');if(ask)ask.onclick=()=>{closeWiki();chatOpen(true);askChat('Explain '+t.title+' to me');};
+    const cl=card.querySelector('#wClose');if(cl)cl.onclick=closeWiki;
+  }catch(e){
+    card.innerHTML='<div class="wloading">Could not reach Wikipedia for “'+esc(title)+'”.<br>Check your connection and try again.<br><br><button class="wchip" id="wClose2">Close</button></div>';
+    const c2=card.querySelector('#wClose2');if(c2)c2.onclick=closeWiki;
+  }}
+async function runWikiSearch(q){
+  q=String(q||'').trim();if(!q)return;
+  const grid=document.getElementById('wikiGrid');if(!grid)return;
+  grid.innerHTML='<div class="wloading">🔎 Searching Wikipedia…</div>';
+  try{
+    const pages=await wikiSearchPages(q,8);
+    if(!pages.length){grid.innerHTML='<div class="wloading">No Wikipedia articles matched “'+esc(q)+'”.</div>';return;}
+    grid.innerHTML=pages.map(p=>'<button class="wcard" data-t="'+esc(p.title)+'">'+(p.thumb?'<img src="'+esc(p.thumb)+'" alt="" loading="lazy">':'')+'<div class="wb"><h4>'+esc(p.title)+'</h4><p>'+esc(p.desc||p.excerpt).slice(0,118)+'</p></div></button>').join('');
+    grid.querySelectorAll('.wcard').forEach(b=>b.onclick=()=>openWiki(b.dataset.t));
+  }catch(e){grid.innerHTML='<div class="wloading">Could not reach Wikipedia. Check your connection and try again.</div>';}}
+(function initWiki(){
+  const inp=document.getElementById('wikiQ'),go=document.getElementById('wikiGo');
+  if(go)go.onclick=()=>runWikiSearch(inp&&inp.value);
+  if(inp)inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runWikiSearch(inp.value);}});
+  document.querySelectorAll('.wchip[data-w]').forEach(b=>b.onclick=()=>{if(inp)inp.value=b.dataset.w;runWikiSearch(b.dataset.w);});
+  const p=document.getElementById('wikiPanel');
+  if(p)p.onclick=e=>{if(e.target===p)closeWiki();};
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeWiki();});
+  const grid=document.getElementById('wikiGrid');
+  if(grid){grid.querySelectorAll('.wsuggest').forEach(b=>b.onclick=()=>{if(inp)inp.value=b.dataset.t;runWikiSearch(b.dataset.t);});}
+})();
+
+/* ================= MODAL + DETAIL VIEWS ================= */
+function openModal(html){
+  const m=document.getElementById('modal');if(!m)return;
+  document.getElementById('modalCard').innerHTML='<button class="modal-close" aria-label="Close">✕</button>'+html;
+  m.classList.add('open');
+  const c=m.querySelector('.modal-close');if(c)c.onclick=closeModal;
+  m.onclick=ev=>{if(ev.target===m)closeModal();};
+}
+function closeModal(){const m=document.getElementById('modal');if(m)m.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+const H4='<h4 style="font-family:Orbitron;font-size:.78rem;letter-spacing:1px;margin:16px 0 6px;color:var(--accent)">';
+function openYear(y){
+  const ev=EVENTS.find(e=>String(e[0])===String(y));
+  if(!ev){toast('No event recorded for '+y);return;}
+  const i=EVENTS.indexOf(ev),rel=EVENTS.slice(Math.max(0,i-2),i+3).filter(e=>e!==ev);
+  openModal('<div class="mreg">'+ev[2]+'</div><h3>'+ev[0]+' — '+ev[1]+'</h3><p>'+ev[3]+'</p>'+H4+'NEARBY IN TIME</h4><p>'+rel.map(e=>e[0]+' — '+e[1]).join('<br>')+'</p>');
+  const tl=document.getElementById('timelineList');if(tl)tl.scrollIntoView({behavior:'smooth',block:'center'});
+}
+const LITD={
+'Hamlet':{p:'The Prince of Denmark is told by his father\'s ghost that Claudius murdered him. He feigns madness, tests the king with a play, and dies in a duel of poison and revenge.',th:'Revenge, mortality, indecision, corruption, performance versus truth.',q:'To be, or not to be, that is the question.'},
+'The Odyssey':{p:'Odysseus spends ten years sailing home from Troy, surviving the Cyclops, the sirens and a sorceress, while Penelope holds off suitors in Ithaca.',th:'Homecoming, cunning over brute force, hospitality, endurance, fate.',q:'Sing to me of the man, Muse, the man of twists and turns.'},
+'War and Peace':{p:'Five aristocratic families live through the Napoleonic invasion of Russia, from society balls to the burning of Moscow.',th:'History as lived experience, free will, family, the ordinary beside the epic.',q:'The strongest of all warriors are these two — Time and Patience.'},
+'Gitanjali':{p:'Song-offerings in which the speaker seeks union with the divine through humility, service and surrender.',th:'Devotion, surrender, the sacred in the everyday, spiritual freedom.',q:'Where the mind is without fear and the head is held high.'},
+'Things Fall Apart':{p:'Okonkwo, a wrestling champion in the Igbo village of Umuofia, resists the arrival of Christian missionaries and colonial rule.',th:'Tradition versus change, masculinity, colonialism, the tragedy of rigidity.',q:'The world has no end, and what is good among one people is an abomination with others.'},
+'One Hundred Years of Solitude':{p:'Seven generations of the Buendía family build and lose the town of Macondo in a cycle of prophecy, war and forgetting.',th:'Cyclic history, solitude, magical realism, memory and oblivion.',q:'The secret of a good old age is simply an honourable pact with solitude.'},
+'Masnavi':{p:'Rumi weaves teaching stories and parables that map the soul\'s journey toward union with the divine.',th:'Divine love, longing, spiritual discipline, the inner meaning of stories.',q:'The wound is the place where the Light enters you.'},
+'The Tale of Genji':{p:'The life and loves of Prince Genji in the Heian court, tracing beauty, desire, ageing and loss across decades.',th:'Mono no aware (the pathos of things), courtly love, impermanence, power.',q:'It is a fine thing to be a courtier, but the passing of time is cruel.'},
+'Faust':{p:'The scholar Faust wagers his soul with Mephistopheles in exchange for experience and transcendence, and is redeemed through striving.',th:'Ambition, the limits of knowledge, temptation, redemption.',q:'Whoever strives with all his might, him we can save.'},
+'Crime and Punishment':{p:'Raskolnikov murders a pawnbroker to prove a theory, then is crushed by guilt until confession and love open a path to renewal.',th:'Guilt, redemption, the psychology of a criminal, rationalisation.',q:'Pain and suffering are always inevitable for a large intelligence and a deep heart.'},
+'Abhijnanashakuntala':{p:'King Dushyanta secretly marries Shakuntala, loses his memory of her to a sage\'s curse, then recognises her through a signet ring.',th:'Memory, love, separation and reunion, duty against desire.',q:'The heart is ever drawn to what is dear, though memory may sleep.'},
+'Don Quixote':{p:'An ageing gentleman reads so many chivalric romances that he rides out as a knight with Sancho Panza, tilting at windmills.',th:'Idealism versus reality, satire, companionship, the birth of the modern novel.',q:'Too much sanity may be madness.'},
+'1984':{p:'Winston Smith rebels in secret against the Party in a totalitarian London ruled by Big Brother and its Thought Police.',th:'Surveillance, language as control, memory, power, individuality.',q:'Who controls the past controls the future.'},
+'Pride and Prejudice':{p:'Elizabeth Bennet navigates courtship and social judgement before finding love with the proud Mr Darcy.',th:'Manners, marriage, class, self-knowledge, first impressions.',q:'I declare after all there is no enjoyment like reading.'},
+'Mahabharata':{p:'The epic of the Kuru dynasty: exile, the dice game, the war at Kurukshetra, and the Bhagavad Gita at its moral centre.',th:'Duty (dharma), war, destiny, justice, the ambiguity of righteousness.',q:'You have the right to your actions, never to their fruits.'},
+'Dream of the Red Chamber':{p:'The decline of the wealthy Jia family, centred on the gifted Baoyu and his relationships in a garden of young women.',th:'Family decline, love and illusion, gender, the impermanence of wealth.',q:'Truth becomes fiction when the fiction is true.'},
+'Les Misérables':{p:'Ex-convict Jean Valjean seeks redemption while pursued by inspector Javert, against the backdrop of revolution in France.',th:'Justice and mercy, redemption, poverty, revolution.',q:'To love another person is to see the face of God.'},
+'Beloved':{p:'Sethe, who escaped slavery, is haunted by the ghost of the daughter she killed to keep free.',th:'Slavery and its legacy, memory, mothering, freedom and its price.',q:'Freeing yourself was one thing; claiming ownership of that freed self was another.'},
+'A Doll\'s House':{p:'Nora Helmer secretly saved her husband and is punished for it; she leaves home to find out who she is.',th:'Marriage, gender roles, selfhood, the cost of appearances.',q:'I must try to educate myself.'},
+'The Book of the Dead':{p:'A collection of spells and declarations that guide the soul through the underworld and the weighing of the heart.',th:'The afterlife, moral accounting, rebirth, ritual knowledge.',q:'I have not done injustice; I have not caused hunger.'}
+};
+function openLit(title){
+  const q=String(title||'').toLowerCase();
+  const w=LIT.find(x=>x.t.toLowerCase()===q)||LIT.find(x=>x.t.toLowerCase().indexOf(q)>=0)||LIT.find(x=>q.indexOf(x.t.toLowerCase())>=0);
+  if(!w){toast('Work not found: '+title);return;}
+  const d=LITD[w.t]||{};
+  openModal('<div class="mreg">'+w.r+'</div><h3>'+w.t+'</h3><div class="mau">'+w.a+'</div><p>'+w.d+'</p>'+
+    (d.p?H4+'PLOT</h4><p>'+d.p+'</p>':'')+(d.th?H4+'THEMES</h4><p>'+d.th+'</p>':'')+(d.q?'<div class="mq">“'+d.q+'”</div>':''));
+}
+const litGridEl=document.getElementById('litGrid');
+if(litGridEl)litGridEl.addEventListener('click',e=>{const c=e.target.closest('.lit');if(c)openLit(c.querySelector('h3').textContent);});
+/* ---- fast providers (bring your own key) ---- */
+const PROVIDERS={
+ groq:{name:'Groq',url:'https://api.groq.com/openai/v1/chat/completions',model:'llama-3.3-70b-versatile'},
+ openai:{name:'OpenAI',url:'https://api.openai.com/v1/chat/completions',model:'gpt-4o-mini'},
+ gemini:{name:'Google Gemini',url:'https://generativelanguage.googleapis.com/v1beta/models/',model:'gemini-2.0-flash'},
+ custom:{name:'Custom (OpenAI-compatible)',url:'',model:''}
+};
+const CFG_KEY='informatica_ai_cfg';let memCfg=null;
+function getCfg(){try{const s=localStorage.getItem(CFG_KEY);if(s)return JSON.parse(s);}catch(e){}
+  return memCfg||{provider:'groq',key:'',base:'',model:''};}
+function setCfg(c){memCfg=c;try{localStorage.setItem(CFG_KEY,JSON.stringify(c));}catch(e){}}
+async function streamOpenAI(url,key,model,messages,onDelta){
+  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({model:model,messages:messages,stream:true,temperature:.6})});
+  if(!res.ok){let m='HTTP '+res.status;try{const j=await res.json();if(j.error&&j.error.message)m=j.error.message;}catch(e){}throw new Error(m);}
+  const reader=res.body.getReader(),dec=new TextDecoder();let buf='',full='';
+  while(true){const r=await reader.read();if(r.done)break;buf+=dec.decode(r.value,{stream:true});
+    const lines=buf.split('\n');buf=lines.pop();
+    for(const ln of lines){const t=ln.trim();if(!t.startsWith('data:'))continue;const d=t.slice(5).trim();if(!d||d==='[DONE]')continue;
+      try{const j=JSON.parse(d);const c=j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content;if(c){full+=c;onDelta(full);}}catch(e){}}}
+  return full;
+}
+async function callGemini(cfg,q){
+  const model=cfg.model||PROVIDERS.gemini.model;
+  const url=PROVIDERS.gemini.url+encodeURIComponent(model)+':generateContent?key='+encodeURIComponent(cfg.key);
+  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({systemInstruction:{parts:[{text:SYS+' Current subject mode: '+chatState.mode+'.'}]},contents:[{role:'user',parts:[{text:q}]}]})});
+  if(!res.ok){let m='HTTP '+res.status;try{const j=await res.json();if(j.error&&j.error.message)m=j.error.message;}catch(e){}throw new Error(m);}
+  const j=await res.json();
+  const p=j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts;
+  return (p&&p.map(x=>x.text||'').join(''))||'';
+}
+async function keylessAnswer(messages){
+  const res=await fetch('https://text.pollinations.ai/openai',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'openai',messages:messages,temperature:.6})});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const j=await res.json();
+  return ((j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content)||'').trim();
+}
+/* ---- voice input (speech recognition) — only runs when the user taps the mic ---- */
+let recog=null,listening=false;
+function navLang(){return (navigator.language||'en-US');}
+function initRecog(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR)return null;
+  const r=new SR();r.continuous=false;r.interimResults=true;r.maxAlternatives=1;r.lang=navLang();
+  r.onresult=e=>{let interim='',fin='';
+    for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;
+      if(e.results[i].isFinal)fin+=t;else interim+=t;}
+    chatText.value=(fin||interim);chatText.style.height='46px';chatText.style.height=Math.min(120,chatText.scrollHeight)+'px';
+    if(fin){try{r.stop();}catch(e){}stopMic();setTimeout(()=>{const v=chatText.value.trim();if(v)askChat(v);},400);}};
+  r.onerror=ev=>{stopMic();
+    if(ev.error==='not-allowed')toast('Microphone permission was blocked');
+    else if(ev.error==='no-speech')toast('No speech detected — try again');};
+  r.onend=()=>stopMic();
+  return r;}
+function startMic(){
+  const r=recog||(recog=initRecog());
+  if(!r){toast('Voice input is not supported in this browser — try Chrome or Edge');return;}
+  try{r.start();listening=true;const b=document.getElementById('chatMic');if(b)b.classList.add('listening');
+    chatText.placeholder='Listening… speak now';}catch(e){}}
+function stopMic(){listening=false;const b=document.getElementById('chatMic');if(b)b.classList.remove('listening');
+  chatText.placeholder='Ask anything — maths, science, history, an essay…';}
+/* ---- read aloud (speech synthesis) — off until the user turns it on ---- */
+let voices=[];
+function loadVoices(){try{voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];}catch(e){voices=[];}}
+if(window.speechSynthesis){loadVoices();window.speechSynthesis.onvoiceschanged=loadVoices;}
+function detectLang(t){
+  if(/[\u0900-\u097F]/.test(t))return 'hi-IN';
+  if(/[\u0980-\u09FF]/.test(t))return 'bn-IN';
+  if(/[\u0B80-\u0BFF]/.test(t))return 'ta-IN';
+  if(/[\u0600-\u06FF]/.test(t))return 'ar-SA';
+  if(/[\u3040-\u30FF]/.test(t))return 'ja-JP';
+  if(/[\u4E00-\u9FFF]/.test(t))return 'zh-CN';
+  if(/[\u0400-\u04FF]/.test(t))return 'ru-RU';
+  if(/[áéíóúñ¿¡]/i.test(t))return 'es-ES';
+  if(/[àâçéèêëîïôûù]/i.test(t))return 'fr-FR';
+  return 'en-US';}
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const clean=String(text).replace(/<br>/g,'. ').replace(/\*\*/g,'').replace(/`/g,'').replace(/\s+/g,' ').trim();
+  if(!clean)return;
+  const lang=detectLang(clean);
+  const v=voices.find(x=>x.lang===lang)||voices.find(x=>x.lang&&x.lang.slice(0,2)===lang.slice(0,2))||null;
+  const parts=clean.match(/[^.!?\u0964]+[.!?\u0964]*/g)||[clean];
+  const chunks=[];let buf='';
+  for(const p of parts){if((buf+p).length>180){if(buf)chunks.push(buf);buf=p;}else buf+=p;}
+  if(buf)chunks.push(buf);
+  chunks.forEach((c,i)=>{const u=new SpeechSynthesisUtterance(c);u.lang=lang;if(v)u.voice=v;u.rate=1;u.pitch=1;
+    if(i===chunks.length-1)u.onend=()=>{const b=document.getElementById('chatVoice');if(b)b.classList.remove('speaking');};
+    window.speechSynthesis.speak(u);});
+  const b=document.getElementById('chatVoice');if(b)b.classList.add('speaking');}
+function stopSpeak(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
+  const b=document.getElementById('chatVoice');if(b)b.classList.remove('speaking');}
+function maybeSpeak(t){try{if(getCfg().voice)speak(t);}catch(e){}}
+function addSpeakBtn(el,text){if(!text)return;const b=document.createElement('button');b.className='spk';b.type='button';
+  b.title='Read this answer aloud';b.textContent='🔊 Read aloud';
+  b.onclick=e=>{e.stopPropagation();speak(text);};el.appendChild(b);}
+function updateVoiceBtn(){const b=document.getElementById('chatVoice');if(!b)return;const on=!!getCfg().voice;
+  b.textContent=on?'🔊':'🔇';b.title=on?'Reading answers aloud: ON — click to turn off':'Reading answers aloud: OFF — click to turn on';
+  b.style.color=on?'var(--accent)':'';}
+function toggleVoice(){const c=getCfg();c.voice=!c.voice;setCfg(c);updateVoiceBtn();
+  if(c.voice){toast('Answers will be read aloud');speak('Voice output enabled');}else{stopSpeak();toast('Voice output off');}}
+document.getElementById('chatVoice').onclick=toggleVoice;
+document.getElementById('chatMic').onclick=()=>{if(listening){try{recog&&recog.stop();}catch(e){}stopMic();}else startMic();};
+const KB=[
+ [/photosynth/i,'**Photosynthesis** is how green plants, algae and some bacteria turn light energy into chemical energy: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. It happens in the chloroplasts and is the source of the oxygen we breathe and the food almost every ecosystem runs on.'],
+ [/sky.{0,12}blue|blue.{0,12}sky/i,'Sunlight contains all colours. Air molecules scatter short (blue) wavelengths far more than long (red) ones — **Rayleigh scattering**, which goes as 1/λ⁴. So blue light reaches your eye from every direction. At sunset the light travels a longer path, blue is scattered away, and reds and oranges get through.'],
+ [/gravity|orbit/i,'**Gravity** is the attraction between masses: F = G·m₁m₂/r². An orbit is simply free fall that keeps missing the ground — the Moon falls toward Earth but moves sideways fast enough to keep circling it.'],
+ [/derivative|differenti/i,'The **derivative** is the instantaneous rate of change: f′(x) = lim(h→0)[f(x+h) − f(x)]/h. Geometrically it is the slope of the tangent. Example: if f(x) = x², then f′(x) = 2x.'],
+ [/pythagor/i,'**Pythagoras\' theorem**: in a right triangle a² + b² = c², where c is the hypotenuse. Example: 3² + 4² = 9 + 16 = 25 = 5². The two squares on the legs together equal the square on the hypotenuse.'],
+ [/water.{0,20}bent|why.{0,10}water/i,'Water (H₂O) is **bent** because oxygen carries two lone pairs that repel the two O–H bonds, giving a bond angle of about 104.5°. That bent, polar shape is why water dissolves so much and boils at 100 °C.'],
+ [/world war i\b|causes of wwi|\bww1\b|first world war/i,'**World War I (1914–1918)** was triggered by the assassination of Archduke Franz Ferdinand, but the deeper causes were militarism, alliance systems, imperialism and nationalism. It ended four empires and redrew Europe.'],
+ [/world war ii|causes of wwii|\bww2\b|second world war/i,'**World War II (1939–1945)** began when Germany invaded Poland. Root causes: the harsh Treaty of Versailles, the Great Depression, the rise of fascism and the failure of appeasement. It ended with the founding of the UN in 1945.'],
+ [/\bdna\b|replicat/i,'**DNA replication** is semi-conservative: helicase unzips the double helix, then DNA polymerase adds complementary bases (A–T, C–G) to each template strand, producing two identical molecules.'],
+ [/heart.{0,20}pump|how.{0,10}heart/i,'The heart is a double pump. The **right side** sends deoxygenated blood to the lungs; the **left side** pumps oxygenated blood around the body. Valves keep flow one-way, and a resting adult heart beats about 60–100 times a minute.'],
+ [/natural selection|evolution/i,'**Natural selection**: individuals vary, more offspring are born than can survive, and those with advantageous inherited traits reproduce more — so those traits become common over generations. Darwin set this out in 1859.'],
+ [/hamlet/i,'**Hamlet** (Shakespeare, c.1600). The Prince of Denmark is told by his father\'s ghost that Claudius murdered him. Themes: revenge, mortality, indecision and corruption. Key line: “To be, or not to be, that is the question.”'],
+ [/plate tecton/i,'**Plate tectonics**: Earth\'s rigid outer shell is broken into plates riding on the semi-molten mantle. Their collisions, separations and slides build mountains, volcanoes and earthquakes along the boundaries.'],
+ [/monsoon/i,'**Monsoons** are seasonal wind reversals. In summer the land heats faster than the sea, creating low pressure that pulls moist ocean air inland — bringing heavy rain. In winter the pattern reverses.']
+];
+function localAnswer(q){for(const kb of KB)if(kb[0].test(q))return kb[1];
+  return 'I\'m offline at the moment, so I can\'t fetch a live answer — but here is the pattern I always use:\n\n**Definition** → what it is.\n**Why it works** → the mechanism.\n**Worked example** → real numbers.\n**Common mistakes** → what to avoid.\n\nAsk again in a moment for the full AI answer.';}
+async function askChat(q){
+  q=(q||'').trim();if(!q||chatState.busy)return;
+  stopSpeak();
+  chatMsg('user',q);chatText.value='';chatText.style.height='46px';chatState.busy=true;document.getElementById('chatSend').disabled=true;
+  typing();
+  if(/who\s+(made|created|built|designed|is)\s+(you|informatica)|your\s+(creator|maker|developer|author)/i.test(q)){
+    untype();const ca='Informatica was created by **Rishaan Sarkar** — built to be a student\'s heaven. ✦';
+    chatMsg('bot',ca);maybeSpeak("Informatica was created by Rishaan Sarkar, built to be a student's heaven.");
+    chatState.busy=false;document.getElementById('chatSend').disabled=false;return;}
+  /* 1. react to obvious interface requests immediately, before the model replies */
+  applyActions(localIntent(q));
+  /* 2. go to the internet when the question needs live information */
+  let webRes=null;
+  if(needsWeb(q)){
+    const wl=sysLine('🌐 Searching the internet…');
+    try{webRes=await webGather(q);}catch(e){webRes=null;}
+    if(webRes&&webCount(webRes)>0){wl.textContent='🌐 Read '+webCount(webRes)+' live source(s) from the internet';}
+    else{wl.textContent='🌐 No live results — answering from knowledge';webRes=null;}
+  }
+  /* 3. ask the model, with live web results + memory + the control protocol */
+  const msgs=[{role:'system',content:SYS+' Current subject mode: '+chatState.mode+'.'}];
+  if(webRes)msgs.push({role:'system',content:webBlock(webRes)});
+  chatHistory.slice(-8).forEach(m=>msgs.push(m));
+  msgs.push({role:'user',content:q});
+  let raw='';
+  try{
+    const cfg=getCfg();
+    if(cfg.key&&cfg.provider){
+      untype();const bot=chatMsg('bot','…');
+      try{
+        if(cfg.provider==='gemini'){raw=await callGemini(cfg,q);}
+        else{const P=PROVIDERS[cfg.provider]||PROVIDERS.custom;
+          const url=cfg.provider==='custom'?(cfg.base.replace(/\/+$/,'')+'/chat/completions'):P.url;
+          raw=await streamOpenAI(url,cfg.key,cfg.model||P.model,msgs,p=>{bot.innerHTML=fmt(parseActions(p).clean||'…');chatMsgs.scrollTop=chatMsgs.scrollHeight;});}
+      }catch(err){raw=await keylessAnswer(msgs).catch(()=>'');}
+      const pa=parseActions(raw||'');
+      const out=pa.clean||localAnswer(q);
+      bot.innerHTML=fmt(out);addSpeakBtn(bot,out);maybeSpeak(out);
+      if(pa.acts.length)applyActions(pa.acts);
+      raw=out;
+    }else{
+      untype();
+      try{raw=await keylessAnswer(msgs);}catch(e){raw='';}
+      const pa=parseActions(raw||'');
+      const out=pa.clean||localAnswer(q);
+      chatMsg('bot',out);maybeSpeak(out);
+      if(pa.acts.length)applyActions(pa.acts);
+      raw=out;
+    }
+  }catch(e){untype();const out=localAnswer(q);chatMsg('bot',out);maybeSpeak(out);raw=out;}
+  if(webRes){const srcs=webSources(webRes);if(srcs.length)showSources(srcs);}
+  chatHistory.push({role:'user',content:q});
+  chatHistory.push({role:'assistant',content:String(raw||'').slice(0,2000)});
+  if(chatHistory.length>16)chatHistory.splice(0,chatHistory.length-16);
+  chatState.busy=false;document.getElementById('chatSend').disabled=false;
+}
+function updateChatMode(m){chatState.mode=m.name;
+  const el=document.getElementById('chatModeName');if(el)el.textContent=m.name;
+  chatChips.innerHTML=m.prompts.map(p=>`<button class="cchip">${p}</button>`).join('');
+  chatChips.querySelectorAll('.cchip').forEach((b,i)=>b.onclick=()=>askChat(m.prompts[i]));}
+function chatOpen(v){chatState.open=v;chatPanel.classList.toggle('open',v);const fab=document.getElementById('chatFab');if(fab)fab.style.display=v?'none':'flex';
+  if(v){const b=document.getElementById('chatBadge');if(b)b.remove();setTimeout(()=>chatText.focus(),40);}}
+document.getElementById('chatFab').onclick=()=>chatOpen(!chatState.open);
+chatPanel.classList.add('open');document.getElementById('chatFab').style.display='none';
+document.getElementById('chatClose').onclick=()=>chatOpen(false);
+document.getElementById('chatSend').onclick=()=>askChat(chatText.value);
+chatText.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();askChat(chatText.value);}});
+chatText.addEventListener('input',()=>{chatText.style.height='46px';chatText.style.height=Math.min(120,chatText.scrollHeight)+'px';});
+/* ---- settings panel wiring ---- */
+function openSet(v){document.getElementById('chatSet').classList.toggle('open',v);if(v)loadSetUI();}
+function loadSetUI(){const c=getCfg();
+  document.getElementById('csProvider').value=c.provider||'groq';
+  document.getElementById('csKey').value=c.key||'';
+  document.getElementById('csBase').value=c.base||'';
+  document.getElementById('csModel').value=c.model||'';
+  syncSetUI();}
+function syncSetUI(){const p=document.getElementById('csProvider').value;
+  document.getElementById('csBaseRow').style.display=p==='custom'?'flex':'none';
+  const def=PROVIDERS[p]?PROVIDERS[p].model:'';
+  document.getElementById('csModel').placeholder=def||'model name';
+  const c=getCfg();
+  document.getElementById('csNote').innerHTML=(p==='groq'?'<b>Groq</b> is the fastest option — replies usually land in under a second. Default model: '+def:
+    p==='gemini'?'<b>Gemini</b> — fast, with a generous free tier. Default model: '+def:
+    p==='openai'?'<b>OpenAI</b>. Default model: '+def:'Enter any OpenAI-compatible base URL, e.g. https://api.example.com/v1.')+
+    '<br>'+(c.key?'✓ Key saved in this browser — the chat will use it.':'No key saved — the chat is using the free shared endpoint, which is slower.');}
+document.getElementById('chatGear').onclick=()=>openSet(!document.getElementById('chatSet').classList.contains('open'));
+document.getElementById('csBack').onclick=()=>openSet(false);
+document.getElementById('csProvider').onchange=syncSetUI;
+document.getElementById('csSave').onclick=()=>{
+  setCfg({provider:document.getElementById('csProvider').value,key:document.getElementById('csKey').value.trim(),
+    base:document.getElementById('csBase').value.trim(),model:document.getElementById('csModel').value.trim(),voice:!!getCfg().voice});
+  syncSetUI();toast('AI settings saved — replies will now be much faster');openSet(false);};
+document.getElementById('csClear').onclick=()=>{setCfg({provider:'groq',key:'',base:'',model:'',voice:!!getCfg().voice});loadSetUI();toast('API key cleared — back to the free endpoint');};
+updateVoiceBtn();
+setTimeout(()=>{chatMsg('bot','Hi! I\'m **Informatica AI**, created by **Rishaan Sarkar**. Ask me anything — maths, science, history, an essay, or a literary work. Switch modes with the dock below to focus my answers. ✦');},500);
+
+/* ================= 3D BOOT ================= */
+window.addEventListener('load',()=>{try{initGL()}catch(e){console.warn('3D unavailable',e)}try{setMode('informatica')}catch(e){}});
+
+
+</script>
+
+<script>
+(() => {
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    window.__informaticaInstallReady = true;
+    document.documentElement.classList.add('install-ready');
+  });
+  window.__informaticaInstall = async () => {
+    if (!deferredPrompt) return false;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    return true;
+  };
+})();
+</script>
+
+</body>
+</html>
